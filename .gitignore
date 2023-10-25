@@ -1,0 +1,3 @@
+.vscode// 
+node_modules/ 
+.env// store spcial files in env files 
