@@ -4,5 +4,7 @@ Slids are in milestone directory
 
 to start server:
 npm update
+
 npm start
+
 go to www.localhost:3000
