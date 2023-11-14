@@ -5,8 +5,8 @@ Slids are in milestone directory
 trello work progress: https://trello.com/b/caGOSYco/group-j
 
 to start server:
+npm i
 npm update
-
 npm start
 
 go to www.localhost:3000

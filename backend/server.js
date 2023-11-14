@@ -1,3 +1,6 @@
+require("dotenv").config();
+const testRoutes = require("./routes/test/index.js");
+app.use("/test", testRoutes);
 
 const path = require("path");
 const express = require("express");
@@ -12,58 +15,51 @@ const cookieparser = require("cookie-parser");
 const morgan = require("morgan");
 const app = express();
 app.use(morgan("dev"));
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser());
-//Port env set up 
+//Port env set up
 const PORT = process.env.PORT || 3000;
 
-
-//livereload 
+//livereload
 if (process.env.NODE_ENV === "development") {
-    const livereload = require("livereload");
-    const connectLiveReload = require("connect-livereload");
+  const livereload = require("livereload");
+  const connectLiveReload = require("connect-livereload");
 
-    const liveReloadServer = livereload.createServer();
+  const liveReloadServer = livereload.createServer();
 
-    liveReloadServer.watch(path.join(__dirname, "backend", "static"));
+  liveReloadServer.watch(path.join(__dirname, "backend", "static"));
 
+  liveReloadServer.server.once("connection", () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/");
+    }, 100);
+  });
 
-    liveReloadServer.server.once("connection", () => {
-      setTimeout(() => {
-
-        liveReloadServer.refresh("/");
-  }, 100); });
-
-    app.use(connectLiveReload());
-  }
+  app.use(connectLiveReload());
+}
 //endliverelead
 
-app.set("views", path.join(__dirname,  "views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-
-//for static for file source  that ar in the bakcend 
+//for static for file source  that ar in the bakcend
 //__dirname is direcorty name
-app.use(express.static(path.join(__dirname,"static")));
-
-
+app.use(express.static(path.join(__dirname, "static")));
 
 //middleware called here
 app.use(requestTimeMiddleware);
 app.use("/", rootRoutes);
-//http error  localHost:3000/eljlekj 
-app.use((_request, _response, next)=>{
-    next(createError(404));
+//http error  localHost:3000/eljlekj
+app.use((_request, _response, next) => {
+  next(createError(404));
 });
 
-//listen on port once its start the function will excute. 
-app.listen(PORT, ()=>{
-    console.log(`Server started on port ${PORT}`);
+//listen on port once its start the function will excute.
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
 
-
-
-//rounte much with any URI start with root/ 
+//rounte much with any URI start with root/
 // app.get("/", (_request, response) => {
 //     response.send("Hello Team J ");
 // });
