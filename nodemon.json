@@ -1,4 +1,4 @@
 {
-    "exit":"js,ejs",
-    "ignore":["backend/static"]
+  "exit": "js,ejs",
+  "ignore": ["backend/static"]
 }

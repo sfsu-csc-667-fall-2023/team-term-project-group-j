@@ -1,3 +1,5 @@
-.vscode// 
-node_modules/ 
-.env// store spcial files in env files 
+node_modules
+*.env
+*.env.local
+*.vscode
+// ignore all files in the build output directory
