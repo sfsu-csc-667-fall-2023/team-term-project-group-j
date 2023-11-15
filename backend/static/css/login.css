@@ -1,3 +1,8 @@
+@media screen and (max-width: 768px) {
+    /* Styles for smaller screens */
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +10,8 @@
     font-family: "poppins, sans-serif";
 }
 body{
-    display: flex;;
-    justify-content: center;
-    align-items:  center;
+    
+ 
     min-height: 100vh;
     background-color:#021838 ;
 
@@ -24,13 +28,18 @@ header{
     list-style-type:none ;
     display: flex;
     gap: 20px;
+   
 }
 
 .nav_links li{
     margin-right: 10px;
+  
 }
 
 .wrapper{
+ 
+    margin-top: 10%;
+    margin-left: 10%;
     background-color: #AA6600;
     width: 420px;
     height: 500px;
@@ -45,6 +54,7 @@ header{
     margin-top: 20px;
 
 }
+
 .wrapper .input-box{
     position: relative;
     width: 80%;
