@@ -4,7 +4,7 @@ const express = require("express");
 const createError = require("http-errors");
 const requestTimeMiddleware = require("./middleware/request-time");
 
-const rootRoutes = require("./routes/root");
+
 const { execPath } = require("process");
 
 const cookieparser = require("cookie-parser");
@@ -46,12 +46,15 @@ app.set("view engine", "ejs");
 //__dirname is direcorty name
 app.use(express.static(path.join(__dirname,"static")));
 
-
-
-//middleware called here
-app.use(requestTimeMiddleware);
-app.use("/", rootRoutes);
-//http error  localHost:3000/eljlekj 
+const loginRoutes = require("./routes/login");
+const gamelobbyRoutes = require("./routes/gamelobby");
+const signupRoutes = require("./routes/signup");
+const authtRoutes = require("./routes/authentication");
+app.use("/", loginRoutes);
+app.use("/authentication", authtRoutes);
+app.use("/gamelobby", gamelobbyRoutes);
+app.use("/signup", signupRoutes);
+ 
 app.use((_request, _response, next)=>{
     next(createError(404));
 });
@@ -63,11 +66,3 @@ app.listen(PORT, ()=>{
 
 
 
-//rounte much with any URI start with root/ 
-// app.get("/", (_request, response) => {
-//     response.send("Hello Team J ");
-// });
-/*if you have 3000/2 the below fucntion will exc*/
-// app.get("/:id", (request, response) => {
-//     response.send(" hi again Hello Team J ${id} ");
-// });
