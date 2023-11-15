@@ -1,6 +1,6 @@
 require("dotenv").config();
 const testRoutes = require("./routes/test/index.js");
-app.use("/test", testRoutes);
+//app.use("/test", testRoutes);
 
 const path = require("path");
 const express = require("express");
@@ -19,6 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser());
 //Port env set up
 const PORT = process.env.PORT || 3000;
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 //livereload
 if (process.env.NODE_ENV === "development") {
@@ -44,7 +47,6 @@ app.set("view engine", "ejs");
 
 //for static for file source  that ar in the bakcend
 //__dirname is direcorty name
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname,"static")));
 
 const loginRoutes = require("./routes/login");
@@ -58,7 +60,6 @@ app.use("/signup", signupRoutes);
  
 app.use((_request, _response, next)=>{
     next(createError(404));
-=======
 app.use(express.static(path.join(__dirname, "static")));
 
 //middleware called here
@@ -67,24 +68,10 @@ app.use("/", rootRoutes);
 //http error  localHost:3000/eljlekj
 app.use((_request, _response, next) => {
   next(createError(404));
->>>>>>> 878014c7b674787c2b2f6a625c9a35d05e7f4b6d
 });
 
 //listen on port once its start the function will excute.
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-
-<<<<<<< HEAD
-
-
-=======
-//rounte much with any URI start with root/
-// app.get("/", (_request, response) => {
-//     response.send("Hello Team J ");
-// });
-/*if you have 3000/2 the below fucntion will exc*/
-// app.get("/:id", (request, response) => {
-//     response.send(" hi again Hello Team J ${id} ");
-// });
->>>>>>> 878014c7b674787c2b2f6a625c9a35d05e7f4b6d
+});

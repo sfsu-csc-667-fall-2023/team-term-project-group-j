@@ -1,9 +1,9 @@
-//milddlewares implemented here
-//display the time when a request is made
+// //milddlewares implemented here
+// //display the time when a request is made
 
-const requestTime = (request, response, next) => {
-  console.log(`Request Received at ${Date.now()}: ${request.method}`);
-  next();
-};
+// const requestTime = (request, response, next) => {
+//   console.log(`Request Received at ${Date.now()}: ${request.method}`);
+//   next();
+// };
 
-module.exports = requestTime;
+// module.exports = requestTime;
