@@ -1,0 +1,1 @@
+DATABASE_URL=postgres:/#fahimamiri@localhost:5432/uno .env
