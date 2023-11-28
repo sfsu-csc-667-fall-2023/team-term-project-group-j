@@ -1,6 +1,6 @@
 require("dotenv").config();
 const testRoutes = require("./routes/test/index.js");
-app.use("/test", testRoutes);
+//app.use("/test", testRoutes);
 
 const path = require("path");
 const express = require("express");
@@ -11,11 +11,14 @@ const requestTimeMiddleware = require("./middleware/request-time");
 const { execPath } = require("process");
 
 const cookieparser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const morgan = require("morgan");
 const app = express();
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
+
 app.use(cookieparser());
 //Port env set up
 const PORT = process.env.PORT || 3000;
@@ -53,7 +56,8 @@ const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
 const authtRoutes = require("./routes/authentication");
-app.use("/", loginRoutes);
+app.use("/", signupRoutes);
+
 app.use("/authentication", authtRoutes);
 app.use("/gamelobby", gamelobbyRoutes);
 app.use("/signup", signupRoutes);

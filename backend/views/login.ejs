@@ -4,11 +4,10 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Taxas Hold login </title>
+    <title>Login </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/login.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src='main.js'></script>
 </head>
 <body>
 
@@ -16,9 +15,9 @@
         <h4>Taxas Hold'Im</h4>
     <nav>
     <ul class="nav_links">
-        <li><a href="#">Login</a></li>
+        <li><a href="login.ejs">Login</a></li>
         <li><a href="#">Taxas Hold im</a></li>
-        <li><a href="#">Sign up</a></li>
+        <li><a href="signup.ejs">Sign up</a></li>
         <li><a href="#"> About Team J </a></li>
     </ul>
     </nav>
@@ -26,7 +25,7 @@
 
     <section>
     <div class="wrapper">
-        <from action="">
+        <form method ="post" action="//authentication/login">
                 <h1>Login</h1>
                 <div class="input-box">
                     <input type="text" placeholder="username" required>
@@ -38,9 +37,9 @@
                 </div>
                 <button type="submit" class="btn">Log in</button>
                 <div class ="reg-link"><p>Forget <a her="#">Password</a>?</p></div>
-                <div class ="reg-link"><p>Do not Have account  <a her="#">Sign up </a></p></div>
+                <div class ="reg-link"><p>Do not Have account  <a her="/signup.ejs">Sign up </a></p></div>
 
-        </from>
+        </form>
     </div>
     </section>
    
