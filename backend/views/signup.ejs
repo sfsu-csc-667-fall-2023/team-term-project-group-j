@@ -24,15 +24,16 @@
     </header>
     
     <div class="wrapper">
-        <from  id="submit"  method="post"  action="/authentication/signup">
+        <form  id="submit"  method="post"  action="/authentication/signup">
                 <h1>Sign Up</h1>
+                
+                <div class="input-box">
+                    <input type="text" name="username"placeholder="Name" required>
+                    <i class='bx bxs-user'></i>
+                </div>
                 <div class="input-box">
                     <input type="email" name="email" placeholder="Email" required>
                     <i class='bx bxs-envelope'></i>
-                </div>
-                <div class="input-box">
-                    <input type="email" name="username"placeholder="Name" required>
-                    <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
                     <input type="password" name="passward" placeholder="Password" required>
@@ -48,7 +49,7 @@
                     </div></label>
                 <div class ="reg-link"><p> Have account  <a her="/Sign.ejs">Sign In </a></p></div>
 
-        </from>
+        </form>
     </div>
     </section>
    
