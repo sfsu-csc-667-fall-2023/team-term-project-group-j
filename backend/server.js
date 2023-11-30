@@ -61,7 +61,7 @@ app.use("/", signupRoutes);
 app.use("/authentication", authtRoutes);
 app.use("/gamelobby", gamelobbyRoutes);
 app.use("/signup", signupRoutes);
- 
+app.use("/login", loginRoutes);
 app.use((_request, _response, next)=>{
     next(createError(404));
 app.use(express.static(path.join(__dirname, "static")));
