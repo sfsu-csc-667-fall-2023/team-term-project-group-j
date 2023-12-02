@@ -41,6 +41,8 @@
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.3",
     "pg-promise": "^11.5.4",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "undici-types": "^5.28.1"
   },
   "devDependencies": {
