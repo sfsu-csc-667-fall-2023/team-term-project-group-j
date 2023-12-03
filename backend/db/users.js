@@ -22,5 +22,3 @@ module.exports = {
     create,
     find_by_email,
 };
-
-console.log("Obamna");

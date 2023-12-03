@@ -49,6 +49,7 @@ router.post("/signup", async(request,response)=>{
   }
 
 });
+
 router.post("/login", async(request,response)  => {
   const {email, password} = request.body;
 try{
@@ -70,7 +71,5 @@ console.log(error)
 response.redirect("login ",{error:"your user and passwords are not valid"});
 }
 });
-
-
 
 module.exports = router; 
