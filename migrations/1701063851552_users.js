@@ -40,3 +40,11 @@ exports.down = (pgm) => {
     pgm.dropTable("users");
 };
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> e9da7036289f747a5c5cdefa94f98a406df119ac

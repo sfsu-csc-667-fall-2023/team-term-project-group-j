@@ -56,7 +56,6 @@ try{
   const users = await Users.find_by_email(email);
   const isValiduser = await bcrypt.compare(password, users.password);
 
-
   //redirect to gamlobby if user is valid
 if(isValiduser){
  response.redirect("/gamelobby");
