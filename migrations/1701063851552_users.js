@@ -31,7 +31,6 @@ exports.up = pgm => {
 };
 
 
-
 /** 
  * @param{import("node-pg-migrate/dist/types").MigrationBuilder} pgm
  *

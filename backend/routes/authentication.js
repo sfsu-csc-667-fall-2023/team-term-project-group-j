@@ -6,10 +6,9 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const { emit } = require("process");
 const SALT_ROUND = 10;
-console.log("Before Users import");
-const { Users } = require("../db/users");
-const { Z_ASCII } = require("zlib");
-console.log("After Users import");
+
+const { Users } = require("../db/index");
+//const { Z_ASCII } = require("zlib");
 
 
 
@@ -21,30 +20,30 @@ router.post("/signup", async(request,response)=>{
   try{
 
     const{ username , email, password}= request.body;
-console.log("Recived sign up request :", {email, username , password})
-if (!Users) {
-  console.error("Users module is not loaded");
-  response.status(500).send("Internal server error");
-  return;
-}
-//check if the user exsit 
-const user_exists = await Users.email_exists(email);
-if(user_exists){
-  response.redirect("/");
-  return;
-}
-//Encrypt the clear text password
-const salt = await bcrypt.genSalt(SALT_ROUND);
-const hash = await bcrypt.hash(password, salt);
+    console.log("Recived sign up request :", {email, username, password})
+    if (!Users) {
+      console.error("Users module is not loaded");
+      response.status(500).send("Internal server error");
+      return;
+    }
+    //check if the user exsit 
+    const user_exists = await Users.email_exists(email);
+    if(user_exists){
+      response.redirect("/");
+      return;
+    }
+    //Encrypt the clear text password
+    const salt = await bcrypt.genSalt(SALT_ROUND);
+    const hash = await bcrypt.hash(password, salt);
 
+    console.log("Obama");
+    //store in db 
+    const {id } = Users.create(email, hash);
 
-//stor in db 
-const {id } = Users.create(email, hash);
-
-//redirect to gamelobby 
- response.redirect("/gamelobby")
-//response.status(200).send("Signup Successfull");
-//response.redirect("/login");
+    //redirect to gamelobby 
+    response.redirect("/gamelobby")
+    //response.status(200).send("Signup Successfull");
+    //response.redirect("/login");
   }catch(error){
     console.error("error during sign up ", error);
     response.status(500).send("internal might be a server error")
