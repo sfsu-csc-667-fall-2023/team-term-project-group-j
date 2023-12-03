@@ -37,7 +37,7 @@ router.post("/signup", async(request,response)=>{
     const hash = await bcrypt.hash(password, salt);
 
     //store in db 
-    const {id } = Users.create(email, hash);
+    const {id } = Users.create(username, email, hash);
 
     //redirect to gamelobby 
     response.redirect("/gamelobby")
