@@ -36,7 +36,6 @@ router.post("/signup", async(request,response)=>{
     const salt = await bcrypt.genSalt(SALT_ROUND);
     const hash = await bcrypt.hash(password, salt);
 
-    console.log("Obama");
     //store in db 
     const {id } = Users.create(email, hash);
 
