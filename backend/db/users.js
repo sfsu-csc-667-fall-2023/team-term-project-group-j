@@ -1,5 +1,5 @@
 const db = require("./connection").connection;
-console.log('db:', db);
+
 //sql
 //check up if the user exist 
 const USER_EXISTENCE = "SELECT email FROM users WHERE email=$1";
