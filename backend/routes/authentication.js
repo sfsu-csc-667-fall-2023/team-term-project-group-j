@@ -40,7 +40,7 @@ router.post("/signup", async(request,response)=>{
     const {id } = Users.create(username, email, hash);
 
     //redirect to gamelobby 
-    response.redirect("/gamelobby")
+    response.redirect("/login")
     //response.status(200).send("Signup Successfull");
     //response.redirect("/login");
   }catch(error){
