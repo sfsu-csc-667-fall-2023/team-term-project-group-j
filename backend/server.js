@@ -1,26 +1,37 @@
 require("dotenv").config();
-const testRoutes = require("./routes/test/index.js");
-//app.use("/test", testRoutes);
-
 const path = require("path");
+
 const express = require("express");
 const createError = require("http-errors");
-const requestTimeMiddleware = require("./middleware/request-time");
+const morgan = require("morgan");
+const cookieparser = require("cookie-parser");
+const bodyParser = require("body-parser");
 const session = require("express-session");
+
+//const requestTimeMiddleware = require("./middleware/request-time");
+const {viewSessionData} = require("./middleware/view-session");
+const {sessionLocals} = require("./middleware/session-locals");
+const {isAuthenticated} = require("./middleware/is-authenticated");
 
 const { execPath } = require("process");
 
-const cookieparser = require("cookie-parser");
-const bodyParser = require("body-parser");
-
-const morgan = require("morgan");
 const app = express();
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(
+  bodyParser.urlencoded({
+    extended:true,
+  }),
+);
 
 app.use(cookieparser());
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+//for static for file source  that ar in the bakcend
+//__dirname is direcorty name
+app.use(express.static(path.join(__dirname,"static")));
+
 //Port env set up
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
@@ -29,10 +40,6 @@ app.listen(3000, () => {
 
 //livereload
 if (process.env.NODE_ENV === "development") {
-  require("dotenv").config();
-  const{viewSessionData }= require("./middleware/view-session");
-  app.use(viewSessionData);
-
   const livereload = require("livereload");
   const connectLiveReload = require("connect-livereload");
   
@@ -46,42 +53,47 @@ if (process.env.NODE_ENV === "development") {
 
   app.use(connectLiveReload());
 }
+//endliverelead
 
 app.use (session({
+  store: new (require("connect-pg-simple")(session))({
+    createTableIfMissing: true,
+  }),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie:{secure: true}
+  cookie: { secure: false },
 }))
-//endliverelead
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+if (process.env.NODE_ENV === "development") {
+  app.use(viewSessionData);
+}
 
-//for static for file source  that ar in the bakcend
-//__dirname is direcorty name
-app.use(express.static(path.join(__dirname,"static")));
+app.use(sessionLocals);
+
+//middleware called here
+//app.use(requestTimeMiddleware);
+
+
 
 const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
 const authtRoutes = require("./routes/authentication");
 const playerroomRoutes = require("./routes/playerroom");
-//middleware called here
-app.use(requestTimeMiddleware);
 
 app.use("/", signupRoutes);
 app.use("/authentication", authtRoutes);
-app.use("/gamelobby", gamelobbyRoutes);
+app.use("/gamelobby", isAuthenticated, gamelobbyRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
-app.use("/playerroom", playerroomRoutes);
+app.use("/playerroom", isAuthenticated, playerroomRoutes);
 app.use((_request, _response, next)=>{
     next(createError(404));
-app.use(express.static(path.join(__dirname, "static")));
 
 
-app.use("/", rootRoutes);
+//app.use("/", rootRoutes);
+
 //http error  localHost:3000/eljlekj
 app.use((_request, _response, next) => {
   next(createError(404));
@@ -92,7 +104,3 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 });
-
-
-
-
