@@ -12,9 +12,9 @@ const email_exists = (email) =>
     .then((_) => true)
     .catch((_) => false);
 
-const create = (email, username, password) => db.one(ADD_USER, [username, email, password]);
+const create = (email, username, password) => db.one(ADD_USER, [email, username, password]);
 
-const find_by_email= (email) => db.one(SIGN_USER_IN,[email]);
+const find_by_email = (email) => db.one(SIGN_USER_IN, [email]);
     
 
 module.exports = {

@@ -37,9 +37,9 @@ router.post("/signup", async(request,response)=>{
     const hash = await bcrypt.hash(password, salt);
 
     //store in db 
-    const { id } = Users.create(username, email, hash);
-  request.session.id = id; // Use id directly
-request.session.email = email; // Use email directly
+    const user = Users.create(username, email, hash);
+    request.session.id= user.id;
+    request.session.email = user.email;
 
     //redirect to gamelobby 
     //response.redirect("/gamelobby")
@@ -51,33 +51,49 @@ request.session.email = email; // Use email directly
   }
 
 });
-<<<<<<< HEAD
 
 router.post("/login", async(request,response)  => {
-=======
-router.post("/gamelobby", async(request,response)  => {
->>>>>>> c8b8d3d82a1becebacffaf97172997e2d0bb31c1
   const {email, password} = request.body;
-try{
-  const users = await Users.find_by_email(email);
-  const isValiduser = await bcrypt.compare(password, users.password);
 
-  //redirect to gamlobby if user is valid
-if(isValiduser){
-  request.session.id= user.id;
-  request.session.email = user.email;
-    console.log({user, session: request.session})
- response.redirect("gamelobby");
-  return;
-}
-  else{
-    response.redirect("login", {error:"your user and passwords are not valid"});
+  try{
+    const user = await Users.find_by_email(email);
+    const isValiduser = await bcrypt.compare(password, user.password);
+    //redirect to gamlobby if user is valid
+    if(isValiduser){
+      request.session.user = {
+        id: user.id,
+        email,
+      };
+      console.log({user, session: request.session})
+      response.redirect("/playerroom");
+      return;
+    }
+    else{
+      response.redirect("/login");
+
+      /*THIS does not work for some reason, find a way to display an error
+      response.render("login", {
+        error:"your user and passwords are not valid",
+      });
+      */
+    }
+
+  } catch(error){
+    console.log(error)
+    response.redirect("/login");
+
+    /*THIS does not work for some reason, find a way to display an error
+      response.render("login", {
+        error:"your user and passwords are not valid",
+      });
+    */
   }
+});
 
-}catch(error){
-console.log(error)
-response.redirect("login ",{error:"your user and passwords are not valid"});
-}
+router.get("/logout", (request, response) => {
+  request.session.destroy();
+
+  response.redirect("/");
 });
 
 module.exports = router; 

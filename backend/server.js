@@ -29,14 +29,15 @@ app.listen(3000, () => {
 
 //livereload
 if (process.env.NODE_ENV === "development") {
-  const livereload = require("livereload");
-  const connectLiveReload = require("connect-livereload");
+  require("dotenv").config();
   const{viewSessionData }= require("./middleware/view-session");
   app.use(viewSessionData);
+
+  const livereload = require("livereload");
+  const connectLiveReload = require("connect-livereload");
+  
   const liveReloadServer = livereload.createServer();
-
   liveReloadServer.watch(path.join(__dirname, "backend", "static"));
-
   liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
       liveReloadServer.refresh("/");
@@ -47,7 +48,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use (session({
-  secret: process.env.SESSION_SECRATE,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie:{secure: true}
@@ -65,14 +66,16 @@ const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
 const authtRoutes = require("./routes/authentication");
+const playerroomRoutes = require("./routes/playerroom");
 //middleware called here
 app.use(requestTimeMiddleware);
-app.use("/", signupRoutes);
 
+app.use("/", signupRoutes);
 app.use("/authentication", authtRoutes);
 app.use("/gamelobby", gamelobbyRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
+app.use("/playerroom", playerroomRoutes);
 app.use((_request, _response, next)=>{
     next(createError(404));
 app.use(express.static(path.join(__dirname, "static")));
