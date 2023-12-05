@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use (session({
-  secret: process.env.SESSION_SECRATE,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie:{secure: true}

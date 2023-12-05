@@ -39,7 +39,7 @@ router.post("/signup", async(request,response)=>{
     //store in db 
     const { id } = Users.create(username, email, hash);
   request.session.id = id; // Use id directly
-request.session.email = email; // Use email directly
+  request.session.email = email; // Use email directly
 
     //redirect to gamelobby 
     //response.redirect("/gamelobby")
