@@ -12,7 +12,7 @@ const { Users } = require("../db/index");
 
 
 
-router.get("/",(request, response)=>{
+router.get("/login",(request, response)=>{
   response.render("login");
 
 });
@@ -29,7 +29,7 @@ router.post("/signup", async(request,response)=>{
     //check if the user exsit 
     const user_exists = await Users.email_exists(email);
     if(user_exists){
-      response.redirect("/");
+      response.redirect("login");
       return;
     }
     //Encrypt the clear text password
@@ -37,19 +37,21 @@ router.post("/signup", async(request,response)=>{
     const hash = await bcrypt.hash(password, salt);
 
     //store in db 
-    const {id } = Users.create(username, email, hash);
+    const { id } = Users.create(username, email, hash);
+  request.session.id = id; // Use id directly
+request.session.email = email; // Use email directly
 
     //redirect to gamelobby 
-    response.redirect("/login")
+    //response.redirect("/gamelobby")
     //response.status(200).send("Signup Successfull");
-    //response.redirect("/login");
+    response.redirect("/login");
   }catch(error){
     console.error("error during sign up ", error);
     response.status(500).send("internal might be a server error")
   }
 
 });
-router.post("/login", async(request,response)  => {
+router.post("/gamelobby", async(request,response)  => {
   const {email, password} = request.body;
 try{
   const users = await Users.find_by_email(email);
@@ -58,7 +60,10 @@ try{
 
   //redirect to gamlobby if user is valid
 if(isValiduser){
- response.redirect("/gamelobby");
+  request.session.id= user.id;
+  request.session.email = user.email;
+    console.log({user, session: request.session})
+ response.redirect("gamelobby");
   return;
 }
   else{

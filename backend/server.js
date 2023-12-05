@@ -6,7 +6,7 @@ const path = require("path");
 const express = require("express");
 const createError = require("http-errors");
 const requestTimeMiddleware = require("./middleware/request-time");
-
+const session = require("express-session");
 
 const { execPath } = require("process");
 
@@ -15,6 +15,7 @@ const bodyParser = require("body-parser");
 
 const morgan = require("morgan");
 const app = express();
+
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
@@ -30,7 +31,8 @@ app.listen(3000, () => {
 if (process.env.NODE_ENV === "development") {
   const livereload = require("livereload");
   const connectLiveReload = require("connect-livereload");
-
+  const{viewSessionData }= require("./middleware/view-session");
+  app.use(viewSessionData);
   const liveReloadServer = livereload.createServer();
 
   liveReloadServer.watch(path.join(__dirname, "backend", "static"));
@@ -43,6 +45,13 @@ if (process.env.NODE_ENV === "development") {
 
   app.use(connectLiveReload());
 }
+
+app.use (session({
+  secret: process.env.SESSION_SECRATE,
+  resave: false,
+  saveUninitialized: true,
+  cookie:{secure: true}
+}))
 //endliverelead
 
 app.set("views", path.join(__dirname, "views"));
@@ -56,6 +65,8 @@ const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
 const authtRoutes = require("./routes/authentication");
+//middleware called here
+app.use(requestTimeMiddleware);
 app.use("/", signupRoutes);
 
 app.use("/authentication", authtRoutes);
@@ -66,8 +77,7 @@ app.use((_request, _response, next)=>{
     next(createError(404));
 app.use(express.static(path.join(__dirname, "static")));
 
-//middleware called here
-app.use(requestTimeMiddleware);
+
 app.use("/", rootRoutes);
 //http error  localHost:3000/eljlekj
 app.use((_request, _response, next) => {
