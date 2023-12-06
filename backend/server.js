@@ -79,12 +79,18 @@ app.use(sessionLocals);
 const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
+const playerroom = require("./routes/palyerroom.js")
 const authtRoutes = require("./routes/authentication");
 const playerroomRoutes = require("./routes/playerroom");
 
 app.use("/", signupRoutes);
 app.use("/authentication", authtRoutes);
+<<<<<<< HEAD
 app.use("/gamelobby", isAuthenticated, gamelobbyRoutes);
+=======
+app.use("/playerroom", playerroom);
+app.use("/gamelobby", gamelobbyRoutes);
+>>>>>>> 66fbe9f (added player room)
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
 app.use("/playerroom", isAuthenticated, playerroomRoutes);

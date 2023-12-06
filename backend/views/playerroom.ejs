@@ -1,25 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Login </title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/login.css'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Player Room</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/playerroom.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
-       
-    <header>
-        <h4>Texas Hold'Em</h4>
-    <nav>
-    <ul class="nav_links">
-        <h1><%= user.id %> <%= user.email %></h1>
-        <li><a href="/authentication/logout">Log out</a></li>
-        <li><a href="#">Texas Hold em</a></li>
-        <li><a href="#"> About Team J </a></li>
-    </ul>
-    </nav>
-    </header>
+    <section>
+        <header>
+            <h4>TeamJ's Game</h4>
+            <nav>
+                <ul class="nav_links">
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Texas Hold em</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">About Team J</a></li>
+                </ul>
+            </nav>
+        </header>
+    </section>
+
+    <section class="container-box">
+        <div class="game-info">
+            <h3>Current Game</h3>
+            <ul>
+                <li>Game42</li>
+                <li>Game43</li>
+                <li>Game78</li>
+            </ul>
+            <div class="join-game">
+                <label for="Joingame">Join Game:</label>
+                <input type="text" id="Joingame" name="Joingame" required>
+                <button class="joingame-btm" type="submit">Create Game</button>
+            </div>
+        </div>
+
+        <div class="usr-chat">
+            <h3>Chat</h3>
+            <div class="user-chat">
+                <label for="user">User:</label>
+                <input type="text" id="user" name="user" required>
+            <div class="chatlog">
+                <p class="text-me"><i>text me... </i></p>
+                <p class="text-me-not"><i>text me not.. </i></p>
+            </div>
+        
+            <div class="chat-txt">
+                <input type="text" id="chat" name="chat" required>
+                <button id="submit" type="submit" class="send-btn">Send</button>
+            </div>
+        </div>
+    </section>
+</body>
 </html>
