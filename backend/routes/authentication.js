@@ -19,7 +19,7 @@ if(user_exists){
 //Encryptions 
 const salt= await bcrypt.genSalt(SALT_ROUNDS);
 const hash = await bcrypt.hash(password, salt);
-
+try{
     //store in db 
     const { id } = Users.create(username, email, hash);
   request.session.id = id; // Use id directly

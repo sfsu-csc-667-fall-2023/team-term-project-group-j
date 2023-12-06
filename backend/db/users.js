@@ -13,15 +13,9 @@ const email_exists = (email) =>
     .then((_) => true)
     .catch((_) => false);
 
-<<<<<<< HEAD
 const create = (email, username, password) => db.one(ADD_USER, [email, username, password]);
 
 const find_by_email = (email) => db.one(SIGN_USER_IN, [email]);
-=======
-const create = (email, password) => db.one(ADD_USER, [email, password]);
-
-const find_by_email= (email, password) => db.one(SIGN_USER_IN,[email, password]);
->>>>>>> 66fbe9f (added player room)
     
 
 module.exports = {
