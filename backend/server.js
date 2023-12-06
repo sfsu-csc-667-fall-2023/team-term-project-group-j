@@ -1,5 +1,6 @@
 require("dotenv").config();
 const path = require("path");
+const { createServer } = require("http");
 
 const express = require("express");
 const createError = require("http-errors");
@@ -7,6 +8,7 @@ const morgan = require("morgan");
 const cookieparser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const { Server } = require("socket.io");
 
 //const requestTimeMiddleware = require("./middleware/request-time");
 const {viewSessionData} = require("./middleware/view-session");
@@ -16,6 +18,7 @@ const {isAuthenticated} = require("./middleware/is-authenticated");
 const { execPath } = require("process");
 
 const app = express();
+const httpServer = createServer(app);
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -55,7 +58,7 @@ if (process.env.NODE_ENV === "development") {
 }
 //endliverelead
 
-app.use (session({
+const sessionMiddleware = session({
   store: new (require("connect-pg-simple")(session))({
     createTableIfMissing: true,
   }),
@@ -63,23 +66,24 @@ app.use (session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-}))
+})
+
+app.use(sessionMiddleware);
 
 if (process.env.NODE_ENV === "development") {
   app.use(viewSessionData);
 }
 
 app.use(sessionLocals);
+const io = new Server(httpServer);
+io.engine.use(sessionMiddleware);
 
 //middleware called here
 //app.use(requestTimeMiddleware);
 
-
-
 const loginRoutes = require("./routes/login");
 const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
-const playerroom = require("./routes/palyerroom.js")
 const authtRoutes = require("./routes/authentication");
 const playerroomRoutes = require("./routes/playerroom");
 
