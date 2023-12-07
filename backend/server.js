@@ -78,12 +78,13 @@ const io = new Server(httpServer);
 io.engine.use(sessionMiddleware);
 app.set("io", io);
 
+//This is supposed to happen when 
+//the io object is used to broadcast 
+//that message to all connected clients
 io.on("connection", (socket) => {
-  console.log("Obamna");
   const sessionId = socket.request.session.id;
   console.log({sessionId})
-
-  //socket.join(socket.request.session.id);
+  socket.join(socket.request.session.id);
 })
 
 //middleware called here
