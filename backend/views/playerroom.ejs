@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/playerroom.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="/js/chat.js" defer></script>
 </head>
+
 <body>
     <section>
         <header>
@@ -45,11 +47,12 @@
                 <label for="user">User:</label>
                 <input type="text" id="user" name="user" required>
             <div class="chatlog">
-                <p class="text-me"><i>text me... </i></p>
-                <p class="text-me-not"><i>text me not.. </i></p>
+                <article>
+                    <p class="text-me"><i>text me... </i></p>
+                    <p class="text-me-not"><i>text me not.. </i></p>
+                </article>
             </div>
-        
-            <div class="chat-txt">
+        <div class="chat-txt">
                 <input type="text" id="chat" name="chat" required>
                 <button id="submit" type="submit" class="send-btn">Send</button>
             </div>
