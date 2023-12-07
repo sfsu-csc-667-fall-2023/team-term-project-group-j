@@ -1,17 +1,13 @@
+const { render, resolveInclude } = require("ejs");
 const express = require("express");
-const { Games } = require("../db");
-const router = express.Router();
+const router = express.Router(); 
 
-router.get("/", async (request, response) => {
-  const { id } = request.session.user;
 
-  const availableGames = await Games.availableGamesForUser(id);
-  const currentGames = await Games.currentGamesForUser(id);
+router.get("/",(request, response)=>{
+  response.render("gamelobby")
 
-  response.render("global_lobby", { availableGames, currentGames });
 });
 
-module.exports = router;
 
 
 module.exports = router; 
