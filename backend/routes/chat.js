@@ -9,7 +9,7 @@ const handler = (request, response) => {
 
   const io = request.app.get("io");
 
-  io.emit(`chat:message:${id === undefined ? 0 : id}`, {
+  io.emit(`chat:message:0`, {
     hash: createHash("sha256").update(email).digest("hex"),
     from: email,
     timestamp: Date.now(),

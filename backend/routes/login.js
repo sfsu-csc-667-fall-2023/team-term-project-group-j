@@ -9,8 +9,6 @@ router.get("/",(request, response)=>{
 router.post("/login", (request, response) => {
     // Process login data
   
-    // Redirect to the gamelobby page upon successful login
-response.redirect("/gamelobby");
   }); 
 });
 
