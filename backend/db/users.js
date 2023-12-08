@@ -3,7 +3,7 @@ const db = require("./connection").connection;
 //sql
 //check up if the user exist 
 const USER_EXISTENCE = "SELECT email FROM users WHERE email=$1";
-const ADD_USER = "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email";
+const ADD_USER = "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, email";
 const SIGN_USER_IN = "SELECT * FROM users WHERE email=$1";
 
 
