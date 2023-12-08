@@ -65,8 +65,8 @@ router.post("/login", async(request,response)  => {
         email,
       };
       //console.log({user, session: request.session})
-      //response.redirect("/playerroom");
-      response.redirect("/gamelobby");
+      response.redirect("/playerroom");
+      //response.redirect("/gamelobby");
       return;
     }
     else{
