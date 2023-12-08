@@ -8,7 +8,6 @@ const SIGN_USER_IN = "SELECT * FROM users WHERE email=$1";
 
 
 const email_exists = (email) =>
-
   db.one(USER_EXISTENCE, [email])
     .then((_) => true)
     .catch((_) => false);

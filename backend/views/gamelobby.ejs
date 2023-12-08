@@ -4,17 +4,67 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Login </title>
+    <title>Gamelobby</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/login.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/gamelobby.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="/js/chat.js" defer></script>
+    <script src="/js/games.js" defer></script>
 </head>
-<body>
-       
+    <body>
+        <section>
+        <header>
+            <h4>TeamJ's Game</h4>
+            <nav>
+            <ul class="nav_links">
+                <h1><%= user.id %> <%= user.email %></h1>
+                <li><a href="/playerroom">Home</a></li>
+            </ul>
+            </nav>
+        </header>
+        </section>
 
+        <main class="container">
+            <h1>Game 2</h1>
+            <section id="game-board">
+      
+              <div class="pot">POT: $100</div>
+              <div class="community-cards">
+                <div class="comm-card-one"></div>
+                <div class="comm-card-two"></div>
+                <div class="comm-card-three"></div>
+                <div class="comm-card-four"></div>
+                <div class="comm-card-five"></div>
+              </div>
 
-        <h1>Welcome to Player Room    </h1>
-        <p>we should design our game page  here </p>
-        <p> where palyer can play game with each other </p>
+              <div class="player-one">Name1: $100</div>
+              <div class="player-two">Name2: $100</div>
+              <div class="player-three">Name3: $100</div>
+              <div class="player-four">Name4: $100</div>
+              <div class="player-five">Name5: $100</div>
+
+              <div class="playerfield">
+                <div class="PlayerCards"></div>
+
+                <form method="post"  id="check-form">
+                    <button type="submit">Check</button>
+                </form>
+                <form method="post"  id="call-form">
+                    <button type="submit">Call</button>
+                </form>
+                <form method="post"  id="fold-form">
+                    <button type="submit">Fold</button>
+                </form>
+                <form method="post"  id="raise-form">
+                    <button type="submit">Raise</button>
+                    <input type="number" id="raiseButton" name="raiseButton" required>
+                </form>
+    
+
+              </div>
+
+            </section>
+
+          </main>
     </body>
 </html>
