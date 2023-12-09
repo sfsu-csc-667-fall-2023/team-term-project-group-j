@@ -88,7 +88,7 @@ li {
     border: none;
 }
 
-/
+
 @media only screen and (min-width: 768px) {
     .container-box {
         flex-direction: row; 
