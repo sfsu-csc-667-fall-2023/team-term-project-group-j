@@ -28,6 +28,7 @@ exports.up = pgm => {
         players: {
             type: "integer[]",
             notNull: true,
+            check: 'array_length(players, 1) <= 5',
             // Players participating in this game.
             // This should also be the turn order of the players
             
