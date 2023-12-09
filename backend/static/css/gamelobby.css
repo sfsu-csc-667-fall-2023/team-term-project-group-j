@@ -1,0 +1,149 @@
+.body {
+    min-height: 100vh;
+    background-color: #021838;
+}
+
+.container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container-box-lobby {
+    height: 600px;
+    border-radius: 15px;
+    width: 80%;
+    background-color: #AA6600;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: aliceblue;
+    text-align: center;
+    font-size: 2em;
+}
+
+.game-and-player {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.gameboard {
+    display: flex;
+    flex-direction: row; /* Display children in a row */
+    justify-content: space-around; /* Distribute space around children */
+    height: 50px;
+    width: 50px;
+}
+
+.player-one,
+.player-two,
+.player-three,
+.player-four,
+.player-five {
+    flex: 1; /* Equal width for all players */
+    margin: 0 10px; /* Adjust the margin for space between names */
+    text-align: center;
+    border-radius: 50%; /* Apply a border radius of 50% */
+    background-color: #021838; /* Add background color for visibility */
+    color: white; /* Set text color to white for better visibility */
+}
+.pot, 
+.blind-btn {
+    height: 50px;
+    width: 50px;
+    background-color: #B81212;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; 
+    margin-left: 45%;
+    border-radius: 20%;
+}
+.blind-btn{
+    border-color: black;
+}
+
+
+.playerfield {
+    background-color: rgb(3, 36, 25);
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls {
+    background-color: rgb(3, 36, 25);
+    height: 300px;
+    width: 600px;
+    border-radius: 5%;
+}
+
+
+#check-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn,
+#raiseButton {
+    height: 40px;
+    width: 100px;
+    background-color: #B81212;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#raiseButton {
+    background-color: white; /* Set the background color for the input */
+    color: black; /* Set text color for better visibility on white background */
+    font-size: 20px;
+}
+
+.community-cards {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+}
+
+.comm-card-one  ,
+.comm-card-two  ,
+.comm-card-three ,
+.comm-card-four ,
+.comm-card-five  {
+    width: 50px;
+    height: 75px;
+    background-color: white;
+    border: 2px solid #B81212;
+    border-radius: 10px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .container-box-lobby {
+      width: 90%; /* Adjust the width for smaller screens */
+    }
+  
+    .margin-left {
+      margin-left: 10%; /* Adjust the margin for smaller screens */
+    }
+  }

@@ -50,6 +50,7 @@ li {
 .user-chat input {
     height: 50px;
     width: 100%; /* Adjusted width for smaller screens */
+    font-size: 16px;
 }
 
 .joingame-btm,
