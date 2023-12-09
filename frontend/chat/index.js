@@ -4,13 +4,19 @@ const chatWindow = document.querySelector("#chat-window");
 
 const chatSocket = io();
 
+console.log("Socket connection established:", chatSocket.connected);
+
 chatSocket.on("chat:message:0", ({from, timestamp, message, hash }) => {
+    const messageTemplate = document.querySelector("#chat-message").content.cloneNode(true)
+
+    console.log(messageTemplate);
+
     const div = document.createElement("div")
     div.classList.add("message");
 
     const img =document.createElement("img");
-    img.src = 'https://gravatar.com/avatar${hash}?s=30';
-    img.alt = 'Avatar of ${from}'
+    img.src = `https://gravatar.com/avatar/${hash}?s=50`;
+    img.alt = `Avatar of ${from}`
 
     const p = document.createElement("p")
     p.innerText = message;
@@ -28,7 +34,9 @@ chatSocket.on("chat:message:0", ({from, timestamp, message, hash }) => {
                 </article>
 */
 
-document.getElementById('submit').addEventListener('click', event => {
+document.getElementById(`submit`).addEventListener(`click`, event => {
+    console.log("Submit button clicked");
+    event.preventDefault();
     submitMessage();
 });
 
@@ -44,3 +52,4 @@ function submitMessage(){
 
     document.getElementById("chat").value = "";
 }
+
