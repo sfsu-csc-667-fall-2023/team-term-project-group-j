@@ -8,11 +8,7 @@ exports.shorthands = undefined;
 
 exports.up = pgm => {
     pgm.createTable("messages", {
-        message_id: {
-            type: "integer",
-            primaryKey: true,
-            notNull: true,
-        },
+        id: 'id',
         fromUser_id: {
             type: "integer",
             // User who sent the message

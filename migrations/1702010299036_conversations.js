@@ -7,11 +7,7 @@ exports.shorthands = undefined;
 
 exports.up = pgm => {
     pgm.createTable("conversations", {
-        convo_id: {
-            type: "integer",
-            primaryKey: true,
-            notNull: true,
-        },
+        id: 'id',
         users: {
             type: "integer[]",
             // Users inside the conversation

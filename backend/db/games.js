@@ -2,6 +2,7 @@ const { create } = require("./games/create");
 const { availableGamesForUser } = require("./games/availableGamesForUser.js");
 
 const { checkCC } = require("./games/checkers/checkCC.js");
+const { checkIfInDeck } = require("./games/checkers/checkIfInDeck.js");
 const { checkRaiserLoop } = require("./games/checkers/checkRaiserLoop.js");
 const { getPlayerFolded } = require("./games/checkers/getPlayerFolded.js");
 const { isPlayerInGame } = require("./games/checkers/isPlayerInGame.js");
@@ -18,6 +19,7 @@ const { startGame } = require("./games/gameFunctions/startGame.js");
 const { startRound } = require("./games/gameFunctions/startRound.js");
 
 const { getBlind } = require("./games/getters/getBlind.js");
+const { getCard } = require("./games/getters/getCard.js");
 const { getCurrentTurn } = require("./games/getters/getCurrentTurn.js");
 const { getGame } = require("./games/getters/getGame.js");
 const { getGameHost } = require("./games/getters/getGameHost.js");
@@ -44,6 +46,7 @@ module.exports = {
     availableGamesForUser,
   
     checkCC,
+    checkIfInDeck,
     checkRaiserLoop,
     getPlayerFolded,
     isPlayerInGame,
@@ -60,6 +63,7 @@ module.exports = {
     startRound,
   
     getBlind,
+    getCard,
     getCurrentTurn,
     getGame,
     getGameHost,

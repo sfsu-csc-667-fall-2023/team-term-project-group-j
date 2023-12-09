@@ -3,12 +3,12 @@ const { connection: db } = database;
 
 const GET_DECK = `
   SELECT deck FROM rounds
-  WHERE round_id=$1
+  WHERE id=$1
 `;
 
 const GET_CARD_USER_ID = `
   SELECT user_id FROM cards
-  WHERE card_id = $1
+  WHERE id = $1
 `;
 
 const checkCC = (roundId) => {

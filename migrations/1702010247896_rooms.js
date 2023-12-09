@@ -7,11 +7,7 @@ exports.shorthands = undefined;
 
 exports.up = pgm => {
     pgm.createTable("room", {
-        room_id: {
-            type: "integer",
-            primaryKey: true,
-            notNull: true,
-        },
+        id: 'id',
         host_id: {
             type: "integer",
             notNull: true,

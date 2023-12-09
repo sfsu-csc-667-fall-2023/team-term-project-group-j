@@ -3,7 +3,7 @@ const { connection: db } = database;
 
 const GET_BLIND = `
   SELECT blind FROM rounds
-  WHERE round_id=$1
+  WHERE id=$1
 `;
 
 const getBlind = (roundId) => db.one(GET_BLIND, [roundId]);

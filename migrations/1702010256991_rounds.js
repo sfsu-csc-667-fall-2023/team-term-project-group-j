@@ -8,11 +8,7 @@ exports.shorthands = undefined;
 
 exports.up = pgm => {
     pgm.createTable("rounds", {
-        round_id: {
-            type: "integer",
-            primaryKey: true,
-            notNull: true,
-        },
+        id: 'id',
         raiser_id: {
             type: "integer",
             // User ID of the raiser

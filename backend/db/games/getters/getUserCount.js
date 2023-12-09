@@ -3,11 +3,11 @@ const { connection: db } = database;
 
 const GET_PLAYER_COUNT = `
   SELECT players FROM room
-  WHERE room_id=$1
+  WHERE id=$1
 `;
 
-const getUserCount = async (roomId) => {
-    const result = await db.oneOrNone('SELECT players FROM room WHERE room_id=$1', [roomId]);
+const getUserCount = (roomId) => {
+    const result = db.oneOrNone(GET_PLAYER_COUNT, [roomId]);
     return result ? result.players.filter(playerId => playerId !== -1).length : 0;
 };
 

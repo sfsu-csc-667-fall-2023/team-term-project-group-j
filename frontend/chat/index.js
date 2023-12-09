@@ -21,6 +21,8 @@ chatSocket.on("chat:message:0", ({from, timestamp, message, hash }) => {
     chatWindow.appendChild(div);
 });
 
+
+
 /*
                 <article id="chat-window">
                     <p class="text-me"><i>text me... </i></p>

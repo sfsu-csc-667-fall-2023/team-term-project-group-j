@@ -1,0 +1,22 @@
+const database = require("../../connection");
+const { connection: db } = database;
+
+const UPDATE_PLAYER_MONEY = `
+  UPDATE players
+  SET bank = bank - $3
+  WHERE user_id=$1 AND room_id=$2
+  RETURNING bank
+`;
+
+const subPlayerMoney = (userId, roomId, money) => {
+    try {
+        const result = db.one(UPDATE_PLAYER_MONEY, [userId, roomId, money]);
+        return result.bank;
+    } catch (error) {
+        // Handle the error, e.g., log it or throw a custom error
+        console.error("Error subtracting money to player's bank:", error);
+        throw error;
+    }
+};
+
+module.exports = { subPlayerMoney };
