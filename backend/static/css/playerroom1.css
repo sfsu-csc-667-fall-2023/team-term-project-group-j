@@ -9,7 +9,7 @@
     flex-direction: column;
     margin: 20px;
     background-color: #AA6600;
-    height: 500px;
+    height: 600px;
     border-radius: 10px;
 }
 
@@ -62,7 +62,7 @@ li {
 }
 
 .chatlog {
-    background-color: gray;
+    background-color: #06224d;
     height: 170px;
     width: 100%; /* Adjusted width for smaller screens */
     margin: 0;
