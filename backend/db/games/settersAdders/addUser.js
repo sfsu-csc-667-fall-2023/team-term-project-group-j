@@ -1,6 +1,12 @@
 const database = require("../../connection");
 const { connection: db } = database;
 
+const CREATE_PLAYER =  `
+    INSERT INTO players (user_id, roomId, bank, folded) 
+    VALUES ($1, $2, 100, 0)
+    RETURNING user_id
+`;
+
 const GET_PLAYERS = `
   SELECT players FROM room
   WHERE id=$1
@@ -23,6 +29,9 @@ const addUser = (userId, gameId) => {
         if (emptySlotIndex !== -1) {
             // Update the players array with the new user at the empty slot
             players[emptySlotIndex] = userId;
+
+            // Create the player in the player table
+            db.one(CREATE_PLAYER, [userId, gameId]);
 
             // Perform the update in the database
             db.one(UPDATE_PLAYERS, [gameId, players]);

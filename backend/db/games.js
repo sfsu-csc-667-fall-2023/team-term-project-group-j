@@ -11,6 +11,7 @@ const { userIsCurrentTurn } = require("./games/checkers/userIsCurrentTurn.js");
 const { checkFoldedPlayers } = require("./games/counters/checkFoldedPlayers.js");
 const { playersWithMoneyCount } = require("./games/counters/playersWithMoneyCount.js");
 
+const { determineWinner } = require("./games/gameFunctions/determineWinner.js");
 const { endGame } = require("./games/gameFunctions/endGame.js");
 const { endRound } = require("./games/gameFunctions/endRound.js");
 const { endTurn } = require("./games/gameFunctions/endTurn.js");
@@ -54,7 +55,8 @@ module.exports = {
   
     checkFoldedPlayers,
     playersWithMoneyCount,
-  
+    
+    determineWinner,
     endGame,
     endRound,
     endTurn,

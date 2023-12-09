@@ -2,7 +2,7 @@ const database = require("../../connection");
 const { connection: db } = database;
 
 const getPlayerMoney = require("../getters/getPlayerMoney.js");
-const getRoundId = require("../getters/getRoundId.js")
+const foldPlayer= require("../settersAdders/foldPlayer.js")
 
 const GET_PLAYERS = `
   SELECT players FROM room
@@ -27,8 +27,13 @@ const roundFoldPlayer = (roomId) => {
                 if (moneyStatus > 0) {
                     db.one(UNFOLD_PLAYER, [playerId, roomId]);
                 }
+                else{
+                    //if they don't have money, they should be auto-folded
+                    foldPlayer(playerId, roomId);
+                }
             }
         }
+        return 1;
         
     } else {
         // Handle the case where no players are found
