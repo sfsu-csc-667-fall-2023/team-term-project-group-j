@@ -1,0 +1,101 @@
+
+.body {
+    min-height: 100vh;
+    background-color: #021838;
+}
+
+.container-box {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: #AA6600;
+    height: 600px;
+    border-radius: 10px;
+}
+
+.game-info,
+.usr-chat {
+    flex: 1;
+    padding: 20px;
+    color: white;
+    background-color: #AA6600;
+}
+
+.join-game,
+.user-chat {
+    margin-top: 20%;
+}
+
+h3 {
+    margin: 15px;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.user-chat label{
+    margin-top: 5%;
+}
+.join-game label
+ {
+    margin-top: 15%;
+    height: 50px;
+    text-align: center;
+}
+
+.join-game input,
+.user-chat input {
+    height: 50px;
+    width: 100%; 
+    font-size: 16px;
+}
+
+.joingame-btm,
+.send-btn {
+    margin-top: 5%;
+    height: 50px;
+    width: 100%; 
+    background-color: #B81212;
+    border: none;
+}
+
+.chatlog {
+    background-color: #06224d;
+    height: 170px;
+    width: 100%; 
+    margin: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.text-me {
+    text-align: left;
+}
+
+.text-me-not {
+    text-align: right;
+}
+.chat-txt input {
+    margin: 0;
+    width: 100%; 
+    height: 50px;
+    font-size: 16px;
+    color: rgb(65, 63, 63);
+    border: none;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .container-box {
+        flex-direction: row; 
+    }
+
+    .game-info,
+    .usr-chat {
+        width: 50%; 
+    }
+}

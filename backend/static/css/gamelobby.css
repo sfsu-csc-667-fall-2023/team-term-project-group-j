@@ -1,0 +1,182 @@
+.body {
+    min-height: 100vh;
+    background-color: #021838;
+}
+
+.container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container-box-lobby {
+    height: 600px;
+    border-radius: 15px;
+    width: 80%;
+    background-color: #AA6600;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: aliceblue;
+    text-align: center;
+    font-size: 2em;
+}
+
+.game-and-player {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.gameboard {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around; 
+    height: 50px;
+    width: 50px;
+}
+
+.player-one,
+.player-two,
+.player-three,
+.player-four,
+.player-five {
+    flex: 1; 
+    margin: 0 10px; 
+    text-align: center;
+    border-radius: 50%; 
+    background-color: #021838;
+    color: white; 
+}
+.pot-blind {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pot,
+.blind-btn {
+    height: 50px;
+    width: 50px;
+    background-color: #B81212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; 
+    border-radius: 20%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pot {
+    margin-left: 40%; 
+}
+.blind-btn {
+    margin-right: 40%; 
+}
+
+.blind-btn{
+    border-color: black;
+}
+
+
+.playerfield {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.controls {
+    background-color: rgb(3, 36, 25);
+    height: 300px;
+    width: 600px;
+    border-radius: 2%;
+
+}
+
+
+#check-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn,
+#raiseButton {
+    height: 40px;
+    width: 100px;
+    background-color: #B81212;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#raiseButton {
+    background-color: white; 
+    color: black; 
+    font-size: 20px;
+}
+
+.community-cards,
+.cards {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.comm-card-one,
+.comm-card-two,
+.comm-card-three,
+.comm-card-four,
+.comm-card-five,
+.chose-card-one,
+.chose-card-two {
+    width: 50px;
+    height: 75px;
+    background-color: white;
+    border: 2px solid #B81212;
+    border-radius: 10px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chose-card {
+    height: 40px;
+    width: 100px;
+    background-color: #B81212;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.cards {
+    margin-top: 60px; 
+    flex-direction: row; 
+}
+
+@media screen and (max-width: 768px) {
+    .container-box-lobby {
+        width: 90%; 
+    }
+
+    .margin-left {
+        margin-left: 10%; 
+    }
+}
