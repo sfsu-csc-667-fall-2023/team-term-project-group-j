@@ -10,12 +10,10 @@ const SALT_ROUND = 10;
 const { Users } = require("../db/index");
 //const { Z_ASCII } = require("zlib");
 
-
-
 router.get("/login",(request, response)=>{
   response.render("login");
-
 });
+
 router.post("/signup", async(request,response)=>{
   try{
 

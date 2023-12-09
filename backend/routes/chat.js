@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { createHash } = require("crypto");
 
+
 const handler = (request, response) => {
   const { id } = request.params;
   const { message } = request.body;
@@ -9,7 +10,7 @@ const handler = (request, response) => {
 
   const io = request.app.get("io");
 
-  io.emit(`chat:message:${id === undefined ? 0 : id}`, {
+  io.emit(`chat:message:0`, {
     hash: createHash("sha256").update(email).digest("hex"),
     from: email,
     timestamp: Date.now(),
