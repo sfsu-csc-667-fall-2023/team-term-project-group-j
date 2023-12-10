@@ -85,25 +85,30 @@ io.on("connection", (socket) => {
   const sessionId = socket.request.session.id;
   console.log({sessionId})
   socket.join(socket.request.session.id);
+
+  if(socket.handshake.query !== undefined){
+    socket.join(socket.handshake.query.gameSocketId)
+  }
+
 })
 
 //middleware called here
 //app.use(requestTimeMiddleware);
 
 const loginRoutes = require("./routes/login");
-const gamelobbyRoutes = require("./routes/gamelobby");
 const signupRoutes = require("./routes/signup");
 const authtRoutes = require("./routes/authentication");
 const playerroomRoutes = require("./routes/playerroom");
-const chatRoutes = require("./routes/chat")
+const chatRoutes = require("./routes/chat");
+const gameRoutes = require("./routes/games");
 
 app.use("/", signupRoutes);
 app.use("/authentication", authtRoutes);
-app.use("/gamelobby", isAuthenticated, gamelobbyRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
 app.use("/playerroom", isAuthenticated, playerroomRoutes);
 app.use("/chat", isAuthenticated, chatRoutes);
+app.use("/games", isAuthenticated, gameRoutes);
 
 app.use((_request, _response, next) => {
   next(createError(404));

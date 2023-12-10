@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const routes = require("./games");
+const gameRoutes = require("./games/index.js");
 
-routes.forEach(({ method, route, handler }) => {
+gameRoutes.forEach(({ method, route, handler }) => {
   router[method](route, handler);
 });
 

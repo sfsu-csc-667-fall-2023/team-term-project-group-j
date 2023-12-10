@@ -28,16 +28,31 @@
         <div class="game-info">
             <h3>Current Game</h3>
             <ul>
-                <li>Game42</li>
-                <li>Game43</li>
-                <li>Game78</li>
+                <section id="game-list">
+                <ul>
+                    <% if (userGames && userGames.length > 0) { %>
+                        <ul>
+                            <% userGames.forEach(game => { %>
+                                <li><a href="/games/<%= game %>">Game <%= game %></a></li>
+                            <% }); %>
+                        </ul>
+                    <% } else { %>
+                        <p>No available games for the user.</p>
+                    <% } %>
+                </ul>
+                </section>
             </ul>
+
             <div class="join-game">
-                <input type="text" id="Joingame" name="Joingame" required>
-                <button class="joingame-btm" type="submit">Join Game</button>
+                <form id="joinGameForm" method="get">
+                    <input type="text" id="joinGameInput" name="Joingame" required>
+                    <button id="joinGameButton" type="submit" class="send-btn">Join Game</button>
+                </form>
             </div>
             <div class="create-game">
-                <button class="creategame-btm" type="submit">Create Game</button>
+                <form action="/games/create" method="get">
+                    <button class="creategame-btm" type="submit">Create Game</button>
+                </form>
             </div>
         </div>
 

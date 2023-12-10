@@ -8,6 +8,10 @@ exports.shorthands = undefined;
 exports.up = pgm => {
     pgm.createTable("room", {
         id: 'id',
+        game_socket_id:{
+            type: "varchar",
+            notNull: true,
+        },
         host_id: {
             type: "integer",
             notNull: true,
@@ -27,12 +31,6 @@ exports.up = pgm => {
             check: 'array_length(players, 1) <= 5',
             // Players participating in this game.
             // This should also be the turn order of the players
-            
-        },
-        chat_id: {
-            type: "integer",
-            notNull: true,
-            // Reference to the conversation for this game
             
         },
     });

@@ -1,10 +1,10 @@
 module.exports = [
-    require("./call"),
-    require("./check"),
+    //require("./call"),
+    //require("./check"),
     require("./create"),
-    require("./fold"),
+    //require("./fold"),
     require("./id"),
     require("./join"),
-    require("./raise"),
-    require("./start"),
+    //require("./raise"),
+    //require("./start"),
   ];
