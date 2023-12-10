@@ -4,6 +4,7 @@ const { availableGamesForUser } = require("./games/availableGamesForUser.js");
 const { checkCC } = require("./games/checkers/checkCC.js");
 const { checkIfInDeck } = require("./games/checkers/checkIfInDeck.js");
 const { checkRaiserLoop } = require("./games/checkers/checkRaiserLoop.js");
+const { doesGameExist } = require("./games/checkers/doesGameExist.js");
 const { getPlayerFolded } = require("./games/checkers/getPlayerFolded.js");
 const { isPlayerInGame } = require("./games/checkers/isPlayerInGame.js");
 const { userIsCurrentTurn } = require("./games/checkers/userIsCurrentTurn.js");
@@ -49,6 +50,7 @@ module.exports = {
     checkCC,
     checkIfInDeck,
     checkRaiserLoop,
+    doesGameExist,
     getPlayerFolded,
     isPlayerInGame,
     userIsCurrentTurn,

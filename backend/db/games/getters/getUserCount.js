@@ -6,9 +6,14 @@ const GET_PLAYER_COUNT = `
   WHERE id=$1
 `;
 
-const getUserCount = (roomId) => {
-    const result = db.oneOrNone(GET_PLAYER_COUNT, [roomId]);
-    return result ? result.players.filter(playerId => playerId !== -1).length : 0;
+const getUserCount = async (roomId) => {
+    try {
+        const result = await db.oneOrNone(GET_PLAYER_COUNT, [roomId]);
+        return result ? result.players.filter(playerId => playerId !== -1).length : 0;
+    } catch (error) {
+        console.error("Error getting user count:", error);
+        return 0;
+    }
 };
 
 module.exports = { getUserCount };

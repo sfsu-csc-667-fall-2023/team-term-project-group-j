@@ -2,26 +2,27 @@ const database = require("../../connection");
 const { connection: db } = database;
 
 const CREATE_PLAYER =  `
-    INSERT INTO players (user_id, roomId, bank, folded) 
+    INSERT INTO players (user_id, room_Id, bank, folded) 
     VALUES ($1, $2, 100, 0)
     RETURNING user_id
 `;
 
 const GET_PLAYERS = `
-  SELECT players FROM room
-  WHERE id=$1
+    SELECT players FROM room
+    WHERE id=$1
 `;
 
 const UPDATE_PLAYERS = `
-  UPDATE room
-  SET players[] = $2
-  WHERE id=$1
-  RETURNING players
+    UPDATE room
+    SET players = $2
+    WHERE id=$1
+    RETURNING players
 `;
 
-const addUser = (userId, gameId) => {
+const addUser = async (userId, gameId) => {
     try {
-        const players = db.one(GET_PLAYERS, [gameId]);
+        const result = await db.one(GET_PLAYERS, [gameId]);
+        const players = result.players;
 
         // Find the first empty slot (-1) in the players array
         const emptySlotIndex = players.indexOf(-1);
@@ -31,10 +32,10 @@ const addUser = (userId, gameId) => {
             players[emptySlotIndex] = userId;
 
             // Create the player in the player table
-            db.one(CREATE_PLAYER, [userId, gameId]);
+            await db.one(CREATE_PLAYER, [userId, gameId]);
 
             // Perform the update in the database
-            db.one(UPDATE_PLAYERS, [gameId, players]);
+            await db.one(UPDATE_PLAYERS, [gameId, players]);
 
             // Return success
             return 1;
