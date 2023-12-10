@@ -8,6 +8,6 @@ const FOLD_PLAYER = `
     RETURNING folded
 `;
 
-const foldPlayer = (userId, roomId) => db.one(FOLD_PLAYER, [userId, roomId]);
+const foldPlayer = async (userId, roomId) => await db.one(FOLD_PLAYER, [userId, roomId]);
 
 module.exports = { foldPlayer };

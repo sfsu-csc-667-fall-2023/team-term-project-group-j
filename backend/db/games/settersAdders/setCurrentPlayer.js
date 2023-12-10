@@ -8,6 +8,6 @@ const SET_CURRENT_PLAYERS = `
     RETURNING currentTurn_id
 `;
 
-const setCurrentPlayer = (userId, roundId) => db.one(SET_CURRENT_PLAYERS, [userId, roundId]);
+const setCurrentPlayer = async (userId, roundId) => await db.one(SET_CURRENT_PLAYERS, [userId, roundId]);
 
 module.exports = { setCurrentPlayer };

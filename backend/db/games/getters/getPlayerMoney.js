@@ -6,6 +6,6 @@ const GET_PLAYER_MONEY = `
   WHERE user_id=$1 AND room_id=$2
 `;
 
-const getPlayerMoney = (userId, roomId) => db.one(GET_PLAYER_MONEY, [userId, roomId]);
+const getPlayerMoney = async (userId, roomId) => await db.one(GET_PLAYER_MONEY, [userId, roomId]);
 
 module.exports = { getPlayerMoney };

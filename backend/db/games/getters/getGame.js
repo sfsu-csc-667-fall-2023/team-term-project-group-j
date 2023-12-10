@@ -6,6 +6,6 @@ const GET_GAME = `
   WHERE id=$1
 `;
 
-const getGame = (roomId) => db.one(GET_GAME, [roomId]);
+const getGame = async (roomId) => db.one(GET_GAME, [roomId]);
 
 module.exports = { getGame };

@@ -30,12 +30,12 @@ const revealNextCC = async (roundId) => {
     let cCard4 = getCard(deck[3]);
     if(cCard4.user_id == -3){
         //Has not been revealed yet
-        db.one(REVEAL_CARD4, [deck[3]]);
+        await db.one(REVEAL_CARD4, [deck[3]]);
     }
     let cCard5 = getCard(deck[4]);
     if(cCard5.user_id == -4){
         //Has not been revealed yet
-        db.one(REVEAL_CARD5, [deck[4]]);
+        await db.one(REVEAL_CARD5, [deck[4]]);
     }
 };
 

@@ -1,11 +1,11 @@
 const database = require("../../connection");
 const { connection: db } = database;
 
-const getCurrentTurn = require("../getters/getCurrentTurn.js");
+const {getCurrentTurn} = require("../getters/getCurrentTurn.js");
 
-const userIsCurrentTurn = (userId, roundId) => {
+const userIsCurrentTurn = async (userId, roundId) => {
 
-    if(userId == getCurrentTurn(roundId)){
+    if(userId == await getCurrentTurn(roundId)){
         return 1;
     }
 

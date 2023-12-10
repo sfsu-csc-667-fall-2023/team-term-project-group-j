@@ -6,6 +6,6 @@ const GET_RAISER = `
   WHERE id=$1
 `;
 
-const getRaiser = (roundId) => db.one(GET_RAISER, [roundId]);
+const getRaiser = async (roundId) => await db.one(GET_RAISER, [roundId]);
 
 module.exports = { getRaiser };

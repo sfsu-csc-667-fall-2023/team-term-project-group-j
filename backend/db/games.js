@@ -30,6 +30,7 @@ const { getPot } = require("./games/getters/getPot.js");
 const { getRaiser } = require("./games/getters/getRaiser.js");
 const { getRoundId } = require("./games/getters/getRoundId.js");
 const { getRoundState } = require("./games/getters/getRoundState.js");
+const { getUserCards } = require("./games/getters/getUserCards.js");
 const { getUserCount } = require("./games/getters/getUserCount.js");
 
 const { addPlayerMoney } = require("./games/settersAdders/addPlayerMoney.js");
@@ -76,6 +77,7 @@ module.exports = {
     getRaiser,
     getRoundId,
     getRoundState,
+    getUserCards,
     getUserCount,
   
     addPlayerMoney,

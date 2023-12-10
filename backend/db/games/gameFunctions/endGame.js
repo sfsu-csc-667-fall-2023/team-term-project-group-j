@@ -16,21 +16,30 @@ const DELETE_ROOM = `
     WHERE id=$1
 `;
 
-const endGame = (gameId, roundId) => {
-    const players =  db.oneOrNone(GET_PLAYERS, [gameId]);
+const endGame = async (gameId, roundId) => {
+    const result = await db.oneOrNone(GET_PLAYERS, [gameId]);
+
+    const playersString = String(result.players);
+    const players = [];
+    
+    // Manually populate the playersArray
+    for (const player of playersString.split(',')) {
+        const playerId = parseInt(player, 10);
+        players.push(playerId);
+    }
 
     //Delete players
     for (const playerId of players) {
         if (playerId !== -1) {
-            db.one(DELETE_PLAYER, [playerId, gameId]);
+            await db.one(DELETE_PLAYER, [playerId, gameId]);
         }
     }
 
     //Delete Round
-    db.one(DELETE_ROUND, [roundId]);
+    await db.one(DELETE_ROUND, [roundId]);
 
     //Delete Room
-    db.one(DELETE_ROOM, [gameId]);
+    await db.one(DELETE_ROOM, [gameId]);
 
 };
 

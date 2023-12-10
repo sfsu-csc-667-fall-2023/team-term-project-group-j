@@ -8,6 +8,6 @@ const INCREASE_BLIND = `
   RETURNING blind
 `;
 
-const raiseBlind = (roundId, money) => db.one(INCREASE_BLIND, [roundId, money]);
+const raiseBlind = async (roundId, money) => await db.one(INCREASE_BLIND, [roundId, money]);
 
 module.exports = { raiseBlind };

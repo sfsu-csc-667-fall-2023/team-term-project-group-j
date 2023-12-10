@@ -14,6 +14,10 @@ const checkIfInDeck = async (roundId, rank, suite) => {
         const result = await db.one(GET_DECK, [roundId]);
         const deck = result.deck;
 
+        if(deck == null){
+            return 0;
+        }
+
         // Check if any card in the deck has the same rank and suite
         const cardExists = await Promise.all(
             deck.map(async (cardId) => {

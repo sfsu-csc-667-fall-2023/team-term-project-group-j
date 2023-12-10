@@ -31,6 +31,9 @@ const addUser = async (userId, gameId) => {
             // Update the players array with the new user at the empty slot
             players[emptySlotIndex] = userId;
 
+            console.log("UserID: " + userId);
+            console.log("GameId: " + gameId);
+
             // Create the player in the player table
             await db.one(CREATE_PLAYER, [userId, gameId]);
 

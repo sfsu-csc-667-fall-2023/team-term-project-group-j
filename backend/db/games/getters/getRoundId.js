@@ -6,6 +6,6 @@ const GET_ROUND_ID = `
   WHERE id=$1
 `;
 
-const getRoundId = (gameId) => db.one(GET_ROUND_ID, [gameId]);
+const getRoundId = async (gameId) => await db.one(GET_ROUND_ID, [gameId]);
 
 module.exports = { getRoundId };

@@ -6,6 +6,6 @@ const GET_CARD = `
   WHERE id=$1
 `;
 
-const getCard = (cardId) => db.one(GET_CARD, [cardId]);
+const getCard = async (cardId) => await db.one(GET_CARD, [cardId]);
 
 module.exports = { getCard };

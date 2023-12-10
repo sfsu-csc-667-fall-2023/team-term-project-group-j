@@ -1,10 +1,10 @@
 const database = require("../../connection");
 const { connection: db } = database;
 
-const getGame = require("../getters/getGame.js")
-const playersWithMoneyCount = require("../counters/playersWithMoneyCount.js");
-const getPlayerMoney = require("../getters/getPlayerMoney.js");
-const checkIfInDeck = require("../checkers/checkIfInDeck.js");
+const {getGame} = require("../getters/getGame.js")
+const {playersWithMoneyCount} = require("../counters/playersWithMoneyCount.js");
+const {getPlayerMoney} = require("../getters/getPlayerMoney.js");
+const {checkIfInDeck} = require("../checkers/checkIfInDeck.js");
 
 const CREATE_ROOM_DECK = `
     UPDATE rounds
@@ -19,32 +19,55 @@ const CREATE_CARD = `
     RETURNING id
 `;
 
-const dealCard = (roomId) => {
-    const game = getGame(roomId);
+const GET_PLAYERS = `
+    SELECT players FROM room
+    WHERE id=$1
+`;
+
+const dealCard = async (roomId) => {
+
+    const game = await getGame(roomId);
 
     //Find the players with money, make an array of their ids
-    const peopleWithMoney = playersWithMoneyCount(game.room_id);
+    const result = await db.oneOrNone(GET_PLAYERS, [roomId]);
+
+    const playersString = String(result.players);
+    const players = [];
+    
+    // Manually populate the playersArray
+    for (const player of playersString.split(',')) {
+        const playerId = parseInt(player, 10);
+        players.push(playerId);
+    }
+
+    const peopleWithMoney = await playersWithMoneyCount(roomId);
+
     let richPeople = new Array(peopleWithMoney);
     let richIndex = 0;
-    for(const playerId of richPeople){
-        if(getPlayerMoney(playerId, game.room_id) > 0){
+    for(const playerId of players){
+        if(playerId == -1){
+            break;
+        }
+        else if((await getPlayerMoney(playerId, roomId)).bank > 0){
             richPeople[richIndex] = playerId;
             richIndex++;
         }
     }
 
-    const deckSize = 5 + peopleWithMoney * 2;
+    const deckSize = 5 + (peopleWithMoney * 2);
     let deck = new Array(deckSize).fill(-1);
 
     let playerOwner = 0;
+    let randomRank = Math.floor(Math.random() * (13 - 1 + 1)) + 1;
+    let randomSuite = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
 
     for (let i = 0; i < deckSize; i++) {
         //Generate a random card and check if it is already in the deck
         do{
-            let randomRank = Math.floor(Math.random() * (13 - 1 + 1)) + 1;
-            let randomSuite = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+            randomRank = Math.floor(Math.random() * (13 - 1 + 1)) + 1;
+            randomSuite = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
 
-        }while(checkIfInDeck(game.round_id, randomRank, randomSuite) == 1)
+        }while(await checkIfInDeck(game.round_id, randomRank, randomSuite) == 1)
 
         //Assign the card to an owner
         let owner = 0;
@@ -108,13 +131,14 @@ const dealCard = (roomId) => {
         }
 
         //Create the card and put it in the db
-        const result = db.one(CREATE_CARD, [randomRank, randomSuite, owner]);
+        const result = await db.one(CREATE_CARD, [randomRank, randomSuite, owner]);
+
 
         //Put the card's id in the deck
         deck[i] = result.id;
     }
     //Now that the deck is created, add it to the database
-    db.one(CREATE_ROOM_DECK, [roomId, game.room_id]);
+    await db.one(CREATE_ROOM_DECK, [roomId, deck]);
 
 };
 

@@ -1,10 +1,3 @@
-import { io } from "socket.io-client";
-
-const gameEntryTemplate = document.querySelector("#join-game-entry");
-const gameList = document.querySelector("#game-list ul");
-
-console.log("Hello From index.js");
-
 document.getElementById(`joinGameButton`).addEventListener(`click`, event => {
     event.preventDefault();
     joinGame();

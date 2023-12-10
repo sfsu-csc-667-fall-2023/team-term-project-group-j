@@ -6,6 +6,6 @@ const GET_CURRENT_TURN = `
   WHERE id=$1
 `;
 
-const getCurrentTurn = (roundId) => db.one(GET_CURRENT_TURN, [roundId]);
+const getCurrentTurn = async (roundId) => await db.one(GET_CURRENT_TURN, [roundId]);
 
 module.exports = { getCurrentTurn };

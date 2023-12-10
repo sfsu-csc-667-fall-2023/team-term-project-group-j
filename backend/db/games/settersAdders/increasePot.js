@@ -8,6 +8,6 @@ const INCREASE_POT = `
   RETURNING pot
 `;
 
-const increasePot = (roundId, money) => db.one(INCREASE_POT, [roundId, money]);
+const increasePot = async (roundId, money) => await db.one(INCREASE_POT, [roundId, money]);
 
 module.exports = { increasePot };

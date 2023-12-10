@@ -6,6 +6,14 @@ const GET_GAME_HOST = `
   WHERE id=$1
 `;
 
-const getGameHost = (gameId) => db.one(GET_GAME_HOST, [gameId]);
+const getGameHost = async (gameId) => {
+  try {
+    const result = await db.one(GET_GAME_HOST, [gameId]);
+    return result.host_id;
+  } catch (error) {
+    console.error('Error getting game host:', error);
+    throw error;
+  }
+};
 
 module.exports = { getGameHost };

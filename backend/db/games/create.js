@@ -7,13 +7,9 @@ const CREATE_GAME = `
     RETURNING id
 `;
 
-
 const create = (gameSocketId, userId) => {
     //Create players array with a max player size of 5
     let players = new Array(5).fill(-1);
-
-    //Add the userId to the players array
-    players[0] = userId;
     
     return db.one(CREATE_GAME, [gameSocketId, userId, players]);
 }

@@ -6,6 +6,6 @@ const GET_POT = `
   WHERE id=$1
 `;
 
-const getPot = (roundId) => db.one(GET_POT, [roundId]);
+const getPot = async (roundId) => await db.one(GET_POT, [roundId]);
 
 module.exports = { getPot };

@@ -6,6 +6,6 @@ const GET_PLAYER_FOLDED = `
   WHERE user_id=$1 AND room_id=$2
 `;
 
-const getPlayerFolded = (userId, roomId) => db.one(GET_PLAYER_FOLDED, [userId, roomId]);
+const getPlayerFolded = async (userId, roomId) => await db.one(GET_PLAYER_FOLDED, [userId, roomId]);
 
 module.exports = { getPlayerFolded };

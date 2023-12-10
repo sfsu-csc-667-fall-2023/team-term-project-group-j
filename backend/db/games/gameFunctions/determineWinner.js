@@ -1,7 +1,7 @@
 const database = require("../../connection");
 const { connection: db } = database;
 
-const getCard = require("../getters/getCard.js");
+const { getCard }= require("../getters/getCard.js");
 
 const GET_DECK = `
     SELECT deck FROM rounds
@@ -13,15 +13,24 @@ const GET_PLAYERS = `
     WHERE id=$1
 `;
 
-const determineWinner = (roomId, roundId) => {
+const determineWinner = async (roomId, roundId) => {
     let winnerId = -1;
     let winnerScore = 0;
-    const deck = db.one(GET_DECK, [roundId]);
+    const deck = await db.one(GET_DECK, [roundId]);
 
-    const players =  db.oneOrNone(GET_PLAYERS, [roomId]);
+    const result = await db.oneOrNone(GET_PLAYERS, [roomId]);
+
+    const playersString = String(result.players);
+    const players = [];
+    
+    // Manually populate the playersArray
+    for (const player of playersString.split(',')) {
+        const playerId = parseInt(player, 10);
+        players.push(playerId);
+    }
 
     for(const playerId of players){
-        if(playerId != -1 && getPlayerFolded(playerId, roomId) == 0){
+        if(playerId != -1 && await getPlayerFolded(playerId, roomId) == 0){
             //If the player has not folded, we can evaluate their score
             const holeCards = deck.filter((cardId) => getCard(cardId).user_id === playerId);
             const communityCards = deck.filter((cardId) => [-1, -2, -3, -6, -7].includes(getCard(cardId).user_id));
@@ -30,7 +39,7 @@ const determineWinner = (roomId, roundId) => {
             const playerHand = [...holeCards, ...communityCards];
 
             // Determine the rank of the player's hand
-            const handScore = getHandRank(playerHand);
+            const handScore = await getHandRank(playerHand);
 
             if (handScore > winnerScore) {
                 winnerId = playerId;
@@ -43,7 +52,7 @@ const determineWinner = (roomId, roundId) => {
 };
 
 // Return a numeric value representing the strength of the hand.
-const getHandRank = (hand) => {
+const getHandRank = async (hand) => {
     let score = 0;
 
     hand.sort((a, b) => {

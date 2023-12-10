@@ -15,6 +15,8 @@ const handler = async (request, response) => {
 
     const gameId = await Games.create( gameSocketId, userId);
 
+    await Games.addUser(userId, gameId.id);
+
     io.emit(GAME_CONSTANTS.CREATED, { id: gameId.id, createdBy: userId });
 
     response.redirect(`/games/${gameId.id}`);

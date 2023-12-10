@@ -11,8 +11,8 @@ const GET_CARD_USER_ID = `
   WHERE id = $1
 `;
 
-const checkCC = (roundId) => {
-    const result = db.oneOrNone(GET_DECK, [roundId]);
+const checkCC = async (roundId) => {
+    const result = await db.oneOrNone(GET_DECK, [roundId]);
 
     if (!result || !result.deck || result.deck.length === 0) {
         // No deck or empty deck, community cards not revealed
@@ -20,7 +20,7 @@ const checkCC = (roundId) => {
     }
 
     for (const cardId of result.deck) {
-        const cardResult = db.oneOrNone(GET_CARD_USER_ID, [cardId]);
+        const cardResult = await db.oneOrNone(GET_CARD_USER_ID, [cardId]);
         const userId = cardResult ? cardResult.user_id : null;
 
         if (userId === -4 || userId === -5) {

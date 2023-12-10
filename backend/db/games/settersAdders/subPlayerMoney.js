@@ -8,9 +8,9 @@ const UPDATE_PLAYER_MONEY = `
   RETURNING bank
 `;
 
-const subPlayerMoney = (userId, roomId, money) => {
+const subPlayerMoney = async (userId, roomId, money) => {
     try {
-        const result = db.one(UPDATE_PLAYER_MONEY, [userId, roomId, money]);
+        const result = await db.one(UPDATE_PLAYER_MONEY, [userId, roomId, money]);
         return result.bank;
     } catch (error) {
         // Handle the error, e.g., log it or throw a custom error
