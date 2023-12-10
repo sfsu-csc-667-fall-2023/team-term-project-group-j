@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Player Room</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/gamelobby.css">
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6575a2070f.js" crossorigin="anonymous"></script>
 
@@ -28,19 +27,18 @@
 
         <main class="container">
             <div class="container-box-lobby">
-            <h1>Game 2</h1>
+            <h1>Game <%= id %></h1>
             <div class="gameboard">
                   <div class="player-one">Name1: $100</div>
                   <div class="player-two">Name2: $100</div>
                   <div class="player-three">Name3: $100</div>
                   <div class="player-four">Name4: $100</div>
                   <div class="player-five">Name5: $100</div>
-                </div>
+
                 <div class="controls">
                     <div class="pot-blind">
                     <div class="pot">POT: $100</div>
-                    <div class="blind-btn">Blind: $5</div>
-                    
+                    <div class="blind-btn">Blind: $5</div>     
                 </div>
                       <div class="playerfield">
                         <div class="community-cards">
@@ -51,22 +49,60 @@
                             <div class="comm-card-five"><i class="fa-solid fa-diamond"></i></div>
                           </div>
                         <div class="cards">
-                            
                             <div class="chose-card-one"><i class="fa-solid fa-heart"></i></div>
                             <div class="chose-card-two"><i class="fa-solid fa-diamond"></i></div>
                             </div>
                         </div>
                 </div>
-                <form method="post"  id="check-form">
-                    <button class ="btn" type="submit">Check</button>
-                    <button class ="btn"type="submit">Call</button>
-                    <button class ="btn"type="submit">Fold</button>
-                    <button class ="btn"type="submit">Raise</button>
-                    <input type="number" id="raiseButton" name="raiseButton" required>
-                </form>
+
+                <% if (user.id === gameHostId && roundId == -1) { %>
+                    <ul>
+                        <form id="start-form">
+                            <button class ="btn" type="submit">Start Game</button>
+                        </form>
+                    </ul>
+                <% } else if(roundId != -1) { %>
+                    <form id="check-form">
+                        <button class ="btn" type="submit">Check</button>
+                    </form>
+                    <form id="call-form">
+                        <button class ="btn" type="submit">Call</button>
+                    </form>
+                    <form id="fold-form">
+                        <button class ="btn" type="submit">Fold</button>
+                    </form>
+                    <form id="raise-form">
+                        <button class ="btn" type="submit">Raise</button>
+                        <input type="number" id="raiseField" name="raiseField" required>
+                    </form>
+                <% } %>
             </div>
 
-        
+            <input
+                type="hidden"
+                name="game-socket-id"
+                id="game-socket-id"
+                value="<%= gameSocketId %>"
+            />
+            <input
+                type="hidden"
+                name="user-socket-id"
+                id="user-socket-id"
+                value="<%= userSocketId %>"
+            />
+            <input
+                type="hidden"
+                name="room-id"
+                id="room-id"
+                value="<%= id %>"
+            />
+            <input
+                type="hidden"
+                name="user-id"
+                id="user-id"
+                value="<%= user.id %>"
+            />
+
             </div>
           </main>
     </body>

@@ -25,9 +25,9 @@ exports.up = pgm => {
             default: 100, // Default value set to 100
         },
         folded: {
-            type: "boolean",
+            type: "integer",
             // If a player has folded in a current round and is not playing
-            default: false, // Default value set to false (0 in boolean context)
+            default: 0, // Default value set to false (0 in boolean context)
         },
     });
 };

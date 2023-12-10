@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/playerroom1.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script src="/js/chat.js" defer></script>
+    <script src="/js/playerroom.js" defer></script>
 </head>
 
 <body>
@@ -26,16 +27,33 @@
 
     <section class="container-box">
         <div class="game-info">
-            <h3>Current Game</h3>
+            <h3>Current Games</h3>
             <ul>
-                <li>Game42</li>
-                <li>Game43</li>
-                <li>Game78</li>
+                <section id="game-list">
+                <ul>
+                    <% if (userGames && userGames.length > 0) { %>
+                        <ul>
+                            <% userGames.forEach(game => { %>
+                                <li><a href="/games/<%= game %>">Game <%= game %></a></li>
+                            <% }); %>
+                        </ul>
+                    <% } else { %>
+                        <p>No available games for the user.</p>
+                    <% } %>
+                </ul>
+                </section>
             </ul>
+
             <div class="join-game">
-                <label for="Joingame">Join Game:</label>
-                <input type="text" id="Joingame" name="Joingame" required>
-                <button class="joingame-btm" type="submit">Create Game</button>
+                <form id="joinGameForm" method="get">
+                    <input type="text" id="joinGameInput" name="Joingame" required>
+                    <button id="joinGameButton" type="submit" class="send-btn">Join Game</button>
+                </form>
+            </div>
+            <div class="create-game">
+                <form action="/games/create" method="get">
+                    <button class="creategame-btm" type="submit">Create Game</button>
+                </form>
             </div>
         </div>
 
@@ -45,7 +63,7 @@
                 <label for="user">User:</label>
                 <input type="text" id="user" name="user" required>
             <div class="chatlog">
-                <article id="chat-window">
+                <article>
                     <p class="text-me"><i>text me... </i></p>
                     <p class="text-me-not"><i>text me not.. </i></p>
                 </article>
@@ -56,12 +74,5 @@
             </div>
         </div>
     </section>
-
-    <template id="chat-message">
-        <div class="message">
-            <img src="" alt="">
-            <p></p>
-        </div>
-    </template>
 </body>
 </html>

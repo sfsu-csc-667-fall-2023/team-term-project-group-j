@@ -8,11 +8,7 @@ exports.shorthands = undefined;
 
 exports.up = pgm => {
     pgm.createTable("rounds", {
-        round_id: {
-            type: "integer",
-            primaryKey: true,
-            notNull: true,
-        },
+        id: 'id',
         raiser_id: {
             type: "integer",
             // User ID of the raiser
@@ -35,10 +31,10 @@ exports.up = pgm => {
             notNull: true,
         },
         deck: {
-            type: "integer[52]",
-            // ID of the 52 cards that are in the game
+            type: "integer[]",
+            // ID of the cards that are in the game
             //references: "cards(card_id)",
-            notNull: true,
+            check: 'array_length(deck, 1) <= 15',
         },
     });
 };
