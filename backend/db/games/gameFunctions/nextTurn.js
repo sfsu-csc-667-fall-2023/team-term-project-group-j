@@ -3,7 +3,8 @@ const { connection: db } = database;
 
 const {getPlayerMoney} = require("../getters/getPlayerMoney.js");
 const {getPlayerFolded} = require("../checkers/getPlayerFolded.js");
-const {getCurrentTurn} = require("../getters/getCurrentTurn")
+const {getCurrentTurn} = require("../getters/getCurrentTurn.js")
+const {getRoundId} = require("../getters/getRoundId.js")
 const {setCurrentPlayer} = require("../settersAdders/setCurrentPlayer.js");
 
 const GET_PLAYERS = `
@@ -35,20 +36,30 @@ const nextTurn = async (gameId) => {
     // Determine the next player's index (circular order)
     let nextPlayerIndex = (currentPlayerIndex + 1) % players.length;
     
+    const roundIdObject = await getRoundId(gameId);
+    const roundId = roundIdObject.round_id;
 
     do{
         // Skip over empty spaces (-1) in the player array
-        while (players[nextPlayerIndex] === -1) {
-            nextPlayerIndex = (nextPlayerIndex + 1) % players.length;
-        }
+        nextPlayerIndex = (nextPlayerIndex + 1) % players.length;
         const nextPlayer = players[nextPlayerIndex];
 
-        //Check if they have money or if they have folded
-        const moneyStatus = await getPlayerMoney(nextPlayer, gameId);
-        if (moneyStatus > 0 && await getPlayerFolded(nextPlayer, gameId) == 0) {
-            setCurrentPlayer(nextPlayer, roundId);
-            return 1;
+        console.log("Looking at " + nextPlayer);
+        //Make sure we are not looking at a null player
+        if(nextPlayer != -1){
+            //Check if they have money or if they have folded
+            let resultMoney = await getPlayerMoney(nextPlayer, gameId);
+            const foldedStatus = await getPlayerFolded(nextPlayer, gameId);
+            const moneyStatus = resultMoney.bank;
+
+            if (moneyStatus > 0 && foldedStatus == 0) {
+                console.log("Next Turn = ", nextPlayer);
+                setCurrentPlayer(nextPlayer, roundId);
+                return 1;
+            }
         }
+        
+        timesIterated++;
 
     } while (timesIterated < 5);
 

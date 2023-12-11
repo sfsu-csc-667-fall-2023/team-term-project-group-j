@@ -5,7 +5,6 @@ const method = "post";
 const route = "/:id/check";
 
 const handler = async (request, response) => {
-console.log("Starting Check");
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
 
@@ -13,14 +12,6 @@ console.log("Starting Check");
     const roundId = roundIdObject.round_id;
 
     const io = request.app.get("io");
-
-    if (roundId !== undefined) {
-        console.log(roundId);
-        console.log();
-        console.log((await Games.getPot(roundId)).pot);
-      } else {
-        console.log("roundId is undefined");
-      }
 
     //Check if in game
     if((await Games.isPlayerInGame(roomId, userId)) == 1){

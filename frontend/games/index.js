@@ -5,7 +5,8 @@ const userSocketId = document.querySelector("#user-socket-id").value;
 const roomId = document.querySelector("#room-id").value;
 const userId = document.querySelector("#user-id").value;
 
-const raiseCount = document.getElementById("raiseField");
+const raiseCountElement = document.getElementById("raiseField");
+const raiseCount = raiseCountElement.value;
 
 const handleStartAction = (event) => {
     event.preventDefault();
@@ -58,7 +59,7 @@ const handleRaiseAction = (event) => {
     fetch(`/games/`+ roomId + `/raise`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userSocketId, gameSocketId, userId, roomId }),
+        body: JSON.stringify({ userSocketId, gameSocketId, userId, roomId, raiseCount }),
         });
 };
 
@@ -76,9 +77,3 @@ addEventListenerIfElementExists("checkForm", handleCheckAction);
 addEventListenerIfElementExists("callForm", handleCallAction);
 addEventListenerIfElementExists("foldForm", handleFoldAction);
 addEventListenerIfElementExists("raiseForm", handleRaiseAction);
-
-
-//<link rel="stylesheet" type="text/css" media="screen" href="css/login.css">
-//</link><link rel="stylesheet" type="text/css" media="screen" href="css/gamelobby.css">
-
-
