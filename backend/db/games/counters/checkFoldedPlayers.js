@@ -25,12 +25,13 @@ const checkFoldedPlayers = async (gameId) => {
         let foldedCount = 0;
         for (const playerId of players) {
             if (playerId !== -1) {
-                const foldedStatus = await getPlayerFolded(playerId, roundId);
-                if (foldedStatus !== -1) {
+                const foldedStatus = await getPlayerFolded(playerId, gameId);
+                if (foldedStatus !== 0) {
                     foldedCount++;
                 }
             }
         }
+
         return foldedCount;
     } else {
         // Handle the case where no players are found

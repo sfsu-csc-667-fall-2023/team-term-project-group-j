@@ -9,6 +9,7 @@ const UPDATE_PLAYER_MONEY = `
 `;
 
 const addPlayerMoney = async (userId, roomId, money) => {
+    console.log("AddPlayerMoney");
     try {
         const result = await db.one(UPDATE_PLAYER_MONEY, [userId, roomId, money]);
         return result.bank;

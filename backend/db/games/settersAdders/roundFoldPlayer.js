@@ -18,6 +18,7 @@ const UNFOLD_PLAYER = `
 
 
 const roundFoldPlayer = async (roomId) => {
+    //console.log("roundFoldPlayer");
     const result = await db.oneOrNone(GET_PLAYERS, [roomId]);
 
     const playersString = String(result.players);

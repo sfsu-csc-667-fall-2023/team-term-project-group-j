@@ -31,15 +31,15 @@ const endGame = async (gameId, roundId) => {
     //Delete players
     for (const playerId of players) {
         if (playerId !== -1) {
-            await db.one(DELETE_PLAYER, [playerId, gameId]);
+            await db.none(DELETE_PLAYER, [playerId, gameId]);
         }
     }
 
     //Delete Round
-    await db.one(DELETE_ROUND, [roundId]);
+    await db.none(DELETE_ROUND, [roundId]);
 
     //Delete Room
-    await db.one(DELETE_ROOM, [gameId]);
+    await db.none(DELETE_ROOM, [gameId]);
 
 };
 

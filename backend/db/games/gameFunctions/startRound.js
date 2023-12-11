@@ -22,7 +22,7 @@ const GET_PLAYERS = `
 `;
 
 const startRound = async (roundId, roomId) => {
-
+    //console.log("startRound");
     await roundFoldPlayer(roomId);
 
     //Determine first player in the order with money

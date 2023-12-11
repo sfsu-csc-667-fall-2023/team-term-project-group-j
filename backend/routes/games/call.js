@@ -5,7 +5,7 @@ const method = "post";
 const route = "/:id/call";
 
 const handler = async (request, response) => {
-
+console.log("Call")
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
 
@@ -27,8 +27,7 @@ const handler = async (request, response) => {
                 //Check how much money the player has
                 const bankResult = await Games.getPlayerMoney(userId, roomId);
                 const playerBank = bankResult.bank;
-
-                const moneyToGamble = blind;
+                let moneyToGamble = blind;
 
                 if(playerBank < blind){
                   moneyToGamble = playerBank;

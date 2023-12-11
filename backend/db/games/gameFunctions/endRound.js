@@ -25,6 +25,13 @@ const DELETE_CARD = `
     WHERE id=$1
 `;
 
+const DELETE_DECK = `
+    UPDATE rounds
+    SET deck = null
+    WHERE id = $1
+    RETURNING id
+`;
+
 const endRound = async (roomId, roundId) => {
     let winnerId = -1;
 
@@ -54,20 +61,31 @@ const endRound = async (roomId, roundId) => {
     }
     
     //Award winnder
-    await addPlayerMoney(winnerId, roomId, getPot(roundId));
-
+    await addPlayerMoney(winnerId, roomId, (await getPot(roundId)).pot);
     //Delete cards from db
-    const deck = await db.oneOrNone(GET_DECK, [roundId]);
-    for(const cardId of deck){
-        await db.one(DELETE_CARD, [cardId]);
+    const resultDeck = await db.one(GET_DECK, [roundId]);
+    const deckString = String(resultDeck.deck);
+    const deckArray = [];
+    
+    // Manually populate the playersArray
+    for (const cardId of deckString.split(',')) {
+        const parsedCardId = parseInt(cardId, 10);
+        deckArray.push(parsedCardId);
+    }
+    for (const cardId of deckArray) {
+        await db.none(DELETE_CARD, [cardId]);
     }
 
-    if(await playersWithMoneyCount(roomId) == await getUserCount(roomId) - 1){
+    await db.one(DELETE_DECK, [roundId]);
+
+    if((await playersWithMoneyCount(roomId)) == (await getUserCount(roomId)) - 1){
         //There is only 1 player left who had money. End the game
-        await await endGame(roomId, roundId);
+        console.log("endGame");
+        await endGame(roomId, roundId);
     }
     else{
-        await await startRound(roundId, roomId);
+        console.log("StartNextRound");
+        await startRound(roundId, roomId);
     }
     return 1;
 }

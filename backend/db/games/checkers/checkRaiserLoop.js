@@ -21,11 +21,21 @@ const checkRaiserLoop = async (gameId) => {
         players.push(playerId);
     }
 
-    const currentPlayer = await getCurrentTurn(gameId);
-    const raiserId = await getRaiser(gameId);
+    const resultCurrent = await getCurrentTurn(gameId);
+    console.log(resultCurrent);
+    const currentPlayer = resultCurrent.currentTurn_id;
+    const resultRaiser = await getRaiser(gameId);
+    const raiserId = resultRaiser.raiser_id;
+
 
     // Find the index of the current player
-    const currentPlayerIndex = players.indexOf(currentPlayer);
+    let currentPlayerIndex = 0;
+    for(let x = 0; x < 5; x++){
+        if(players[x] == currentPlayer){
+            currentPlayerIndex = x;
+            break;
+        }
+    }
 
     // Determine the next player's index (circular order)
     let nextPlayerIndex = (currentPlayerIndex + 1) % players.length;

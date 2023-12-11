@@ -13,7 +13,6 @@ const GET_PLAYERS = `
 `;
 
 const nextTurn = async (gameId) => {
-    console.log("Start next turn");
     const result = await db.oneOrNone(GET_PLAYERS, [gameId]);
 
     const playersString = String(result.players);
@@ -34,7 +33,7 @@ const nextTurn = async (gameId) => {
     let timesIterated = 0;
 
     // Determine the next player's index (circular order)
-    let nextPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    let nextPlayerIndex = currentPlayerIndex;
     
     const roundIdObject = await getRoundId(gameId);
     const roundId = roundIdObject.round_id;
@@ -44,13 +43,15 @@ const nextTurn = async (gameId) => {
         nextPlayerIndex = (nextPlayerIndex + 1) % players.length;
         const nextPlayer = players[nextPlayerIndex];
 
-        console.log("Looking at " + nextPlayer);
         //Make sure we are not looking at a null player
         if(nextPlayer != -1){
             //Check if they have money or if they have folded
             let resultMoney = await getPlayerMoney(nextPlayer, gameId);
             const foldedStatus = await getPlayerFolded(nextPlayer, gameId);
             const moneyStatus = resultMoney.bank;
+
+            console.log(foldedStatus);
+            
 
             if (moneyStatus > 0 && foldedStatus == 0) {
                 console.log("Next Turn = ", nextPlayer);

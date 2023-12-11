@@ -10,6 +10,9 @@ const {checkCC} = require("../checkers/checkCC.js");
 const {revealNextCC} = require("../settersAdders/revealNextCC.js");
 
 const endTurn = async (roomId, roundId) => {
+    console.log("EndTurn");
+    console.log(await checkFoldedPlayers(roomId));
+    console.log(await getUserCount(roomId) - 1);
 
     //Check how many players have folded
     if(await checkFoldedPlayers(roomId) == await getUserCount(roomId) - 1){
@@ -26,11 +29,13 @@ const endTurn = async (roomId, roundId) => {
         //Next player is the raiser, determine if we need to end the round
         if(await checkCC(roundId) == 0){
             //Not all CC have been revealed, reveal the next one, then pass off the turn
+            console.log("reveal next CC");
             await revealNextCC(roundId);
             await nextTurn(roomId, roundId);
         }
         else{
             //All CC's have been revealed, end the round
+            console.log("EndRound");
             await endRound(roomId, roundId);
         }
     }

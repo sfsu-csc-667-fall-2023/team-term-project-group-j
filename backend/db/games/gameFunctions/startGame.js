@@ -25,11 +25,7 @@ const CREATE_FAKE_CARD =`
 
 const startGame = async (roomId) => {
     const hostId = await getGameHost(roomId);
-
-    //Create a fake deck
-    //await
-    //const fakeDeck = new Array(15).fill();
-
+    
     const result = await db.one(CREATE_ROUND, [-1, 5, 0, hostId]);
     const roundId = result.id;
 

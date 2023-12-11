@@ -9,8 +9,6 @@ const handler = async (request, response) => {
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
     const raiseAmount = request.body.raiseCount;
-    console.log(request.body);
-
 
     const roundIdObject = await Games.getRoundId(roomId);
     const roundId = roundIdObject.round_id;
@@ -25,7 +23,7 @@ const handler = async (request, response) => {
             const blindResult = await Games.getBlind(roundId);
             const blind = blindResult.blind;
 
-            if(blind < raiseAmount){
+            if(blind <= raiseAmount){
                 //check if the player has enough money to do that
                 const bankResult = await Games.getPlayerMoney(userId, roomId);
                 const playerBank = bankResult.bank;

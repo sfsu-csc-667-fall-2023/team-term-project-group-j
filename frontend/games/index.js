@@ -1,12 +1,11 @@
-
-
 const gameSocketId = document.querySelector("#game-socket-id").value;
 const userSocketId = document.querySelector("#user-socket-id").value;
 const roomId = document.querySelector("#room-id").value;
 const userId = document.querySelector("#user-id").value;
 
+let raiseCount = 0; 
+
 const raiseCountElement = document.getElementById("raiseField");
-const raiseCount = raiseCountElement.value;
 
 const handleStartAction = (event) => {
     event.preventDefault();
@@ -55,6 +54,7 @@ const handleFoldAction = (event) => {
 const handleRaiseAction = (event) => {
     event.preventDefault();
     console.log("raise button pressed");
+    raiseCount = parseInt(raiseCountElement.value, 10) || 0;
   
     fetch(`/games/`+ roomId + `/raise`, {
         method: "post",
@@ -66,7 +66,7 @@ const handleRaiseAction = (event) => {
 const addEventListenerIfElementExists = (elementId, eventListener) => {
     const element = document.getElementById(elementId);
     if (element) {
-        element.addEventListener("click", eventListener);
+        element.addEventListener("submit", eventListener);
     } else {
         console.warn(`Element with ID '${elementId}' not found. Event listener not added.`);
     }

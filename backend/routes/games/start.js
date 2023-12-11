@@ -5,7 +5,6 @@ const method = "post";
 const route = "/:id/start";
 
 const handler = async (request, response) => {
-console.log("Start Start");
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
 
@@ -17,9 +16,10 @@ console.log("Start Start");
         //io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, state);
 
         //Broadcast the user's cards
-        const userCards = await Games.getUserCards(userId, roomId);
-        console.log("User socket: " + Users.getUserSocket(userId));
-        io.to(request.body.userSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, { userId, userCards });
+        console.log("BroadCast");
+        //const userCards = await Games.getUserCards(userId, roomId);
+        //console.log("User socket: " + Users.getUserSocket(userId));
+        //io.to(request.body.userSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, { userId, userCards });
 
         response.status(200).send();
     }

@@ -25,7 +25,7 @@ const GET_PLAYERS = `
 `;
 
 const dealCard = async (roomId) => {
-
+    //console.log("dealCard");
     const game = await getGame(roomId);
 
     //Find the players with money, make an array of their ids
