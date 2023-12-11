@@ -9,7 +9,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6575a2070f.js" crossorigin="anonymous"></script>
 
-    <script src="/js/chat.js" defer></script>
     <script src="/js/games.js" defer></script>
 </head>
     <body>
@@ -57,21 +56,21 @@
 
                 <% if (user.id === gameHostId && roundId == -1) { %>
                     <ul>
-                        <form id="start-form">
+                        <form id="startForm">
                             <button class ="btn" type="submit">Start Game</button>
                         </form>
                     </ul>
                 <% } else if(roundId != -1) { %>
-                    <form id="check-form">
+                    <form id="checkForm">
                         <button class ="btn" type="submit">Check</button>
                     </form>
-                    <form id="call-form">
+                    <form id="callForm">
                         <button class ="btn" type="submit">Call</button>
                     </form>
-                    <form id="fold-form">
+                    <form id="foldForm">
                         <button class ="btn" type="submit">Fold</button>
                     </form>
-                    <form id="raise-form">
+                    <form id="raiseForm">
                         <button class ="btn" type="submit">Raise</button>
                         <input type="number" id="raiseField" name="raiseField" required>
                     </form>

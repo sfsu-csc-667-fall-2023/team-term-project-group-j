@@ -1,3 +1,5 @@
+
+
 const gameSocketId = document.querySelector("#game-socket-id").value;
 const userSocketId = document.querySelector("#user-socket-id").value;
 const roomId = document.querySelector("#room-id").value;
@@ -60,11 +62,23 @@ const handleRaiseAction = (event) => {
         });
 };
 
-document.getElementById("#start-form").addEventListener("click", handleStartAction);
-document.getElementById("#check-form").addEventListener("click", handleCheckAction);
-document.getElementById("#call-form").addEventListener("click", handleCallAction);
-document.getElementById("#fold-form").addEventListener("click", handleFoldAction);
-document.getElementById("#raise-form").addEventListener("click", handleRaiseAction);
+const addEventListenerIfElementExists = (elementId, eventListener) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.addEventListener("click", eventListener);
+    } else {
+        console.warn(`Element with ID '${elementId}' not found. Event listener not added.`);
+    }
+};
+
+addEventListenerIfElementExists("startForm", handleStartAction);
+addEventListenerIfElementExists("checkForm", handleCheckAction);
+addEventListenerIfElementExists("callForm", handleCallAction);
+addEventListenerIfElementExists("foldForm", handleFoldAction);
+addEventListenerIfElementExists("raiseForm", handleRaiseAction);
+
 
 //<link rel="stylesheet" type="text/css" media="screen" href="css/login.css">
 //</link><link rel="stylesheet" type="text/css" media="screen" href="css/gamelobby.css">
+
+

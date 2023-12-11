@@ -14,17 +14,15 @@ const checkFoldedPlayers = async (gameId) => {
 
     const playersString = String(result.players);
     const players = [];
-    
     // Manually populate the playersArray
     for (const player of playersString.split(',')) {
         const playerId = parseInt(player, 10);
         players.push(playerId);
     }
-    const roundId = await getRoundId(gameId);
-
+    const roundResult = await getRoundId(gameId);
+    const roundId = roundResult.round_id;
     if (players) {
         let foldedCount = 0;
-
         for (const playerId of players) {
             if (playerId !== -1) {
                 const foldedStatus = await getPlayerFolded(playerId, roundId);
@@ -33,7 +31,6 @@ const checkFoldedPlayers = async (gameId) => {
                 }
             }
         }
-
         return foldedCount;
     } else {
         // Handle the case where no players are found

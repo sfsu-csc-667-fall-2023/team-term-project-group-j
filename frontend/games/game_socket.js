@@ -1,17 +1,18 @@
 import { io } from "socket.io-client";
 import * as GAME_CONSTANTS from "@constants/games";
 
+console.log("Hello from bundled game socket");
+
 let gameSocket;
 
 const configure = (socketId) => {
   gameSocket = io({ query: { id: socketId } });
-
-  gameSocket.on(GAME_CONSTANTS.STATE_UPDATED, stateUpdated);
-
   console.log("Game socket configured");
 
   return Promise.resolve();
 };
+
+gameSocket.on(GAME_CONSTANTS.STATE_UPDATED, stateUpdated);
 
 const stateUpdated = ({ blind, pot, communityCards, players }) => {
     // Callback function called when the game state is updated

@@ -4,9 +4,13 @@ const chatWindow = document.querySelector("#chat-window");
 
 const chatSocket = io();
 
-console.log("Socket connection established:", chatSocket.connected);
+chatSocket.on("connect", () => {
+    console.log("Socket connection established:", chatSocket.connected);
+});
 
-chatSocket.on("chat:message:0", ({from, timestamp, message, hash }) => {
+
+//When the chat socket recieves a message
+chatSocket.on(`chat:message:0`, ({from, timestamp, message, hash }) => {
     const messageTemplate = document.querySelector("#chat-message").content.cloneNode(true)
 
     console.log(messageTemplate);
@@ -36,6 +40,7 @@ chatSocket.on("chat:message:0", ({from, timestamp, message, hash }) => {
                 </article>
 */
 
+
 document.getElementById(`submit`).addEventListener(`click`, event => {
     console.log("Submit button clicked");
     event.preventDefault();
@@ -46,7 +51,7 @@ function submitMessage(){
     const message = document.getElementById("chat").value;
     console.log("Message submitted:", message);
     
-    fetch(`/chat/0`, {
+    fetch(`/0/chat`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),

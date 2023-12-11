@@ -12,6 +12,7 @@ const GET_PLAYERS = `
 `;
 
 const nextTurn = async (gameId) => {
+    console.log("Start next turn");
     const result = await db.oneOrNone(GET_PLAYERS, [gameId]);
 
     const playersString = String(result.players);
@@ -23,7 +24,8 @@ const nextTurn = async (gameId) => {
         players.push(playerId);
     }
 
-    const currentPlayer = await getCurrentTurn(gameId);
+    const resultCurrentPlayer = await getCurrentTurn(gameId);
+    const currentPlayer = resultCurrentPlayer.currentTurn_id;
 
     // Find the index of the current player
     const currentPlayerIndex = players.indexOf(currentPlayer);

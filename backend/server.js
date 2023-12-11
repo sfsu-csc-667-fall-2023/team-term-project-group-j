@@ -84,12 +84,12 @@ app.set("io", io);
 io.on("connection", (socket) => {
   const sessionId = socket.request.session.id;
   console.log({sessionId})
-  socket.join(socket.request.session.id);
+  socket.join(sessionId);
 
   if(socket.handshake.query !== undefined){
-    socket.join(socket.handshake.query.gameSocketId)
+    socket.join(socket.handshake.query.id)
+    console.log(socket.handshake.query.id);
   }
-
 })
 
 //middleware called here

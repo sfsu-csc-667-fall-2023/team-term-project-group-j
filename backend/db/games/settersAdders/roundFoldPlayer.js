@@ -33,7 +33,8 @@ const roundFoldPlayer = async (roomId) => {
 
         for (const playerId of players) {
             if (playerId !== -1) {
-                const moneyStatus = await getPlayerMoney(playerId, roomId);
+                const result = await getPlayerMoney(playerId, roomId);
+                const moneyStatus = result.bank;
                 if (moneyStatus > 0) {
                     await db.one(UNFOLD_PLAYER, [playerId, roomId]);
                 }

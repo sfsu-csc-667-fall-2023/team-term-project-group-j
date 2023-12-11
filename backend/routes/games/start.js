@@ -5,7 +5,7 @@ const method = "post";
 const route = "/:id/start";
 
 const handler = async (request, response) => {
-
+console.log("Start Start");
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
 
@@ -14,15 +14,12 @@ const handler = async (request, response) => {
     if(await Games.getUserCount(roomId) > 1 && userId == await Games.getGameHost(roomId)){
         await Games.startGame(roomId);
 
-        
-        console.log("Obamna");
-
-        //io.to(gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, state);
+        //io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, state);
 
         //Broadcast the user's cards
         const userCards = await Games.getUserCards(userId, roomId);
         console.log("User socket: " + Users.getUserSocket(userId));
-        //io.to(Users.getUserSocket(userId)).emit(GAME_CONSTANTS.STATE_UPDATED, { userId, userCards });
+        io.to(request.body.userSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, { userId, userCards });
 
         response.status(200).send();
     }

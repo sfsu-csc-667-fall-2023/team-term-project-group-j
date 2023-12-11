@@ -5,25 +5,29 @@ const method = "post";
 const route = "/:id/check";
 
 const handler = async (request, response) => {
-    console.log("Starting Check");
+console.log("Starting Check");
     const { id: roomId } = request.params;
     const { id: userId } = request.session.user;
 
-    const roundId = await Games.getRoundId(gameId).round_id;
+    const roundIdObject = await Games.getRoundId(roomId);
+    const roundId = roundIdObject.round_id;
 
     const io = request.app.get("io");
 
-    console.log(roundId);
-    console.log(await Games.isPlayerInGame(roomId, userId));
-    console.log((await Games.userIsCurrentTurn(roundId)));
-    console.log((await Games.getPot(roundId)));
+    if (roundId !== undefined) {
+        console.log(roundId);
+        console.log();
+        console.log((await Games.getPot(roundId)).pot);
+      } else {
+        console.log("roundId is undefined");
+      }
 
     //Check if in game
     if((await Games.isPlayerInGame(roomId, userId)) == 1){
         //Check if in current turn
-        if((await Games.userIsCurrentTurn(roundId)) == 1){
+        if((await Games.userIsCurrentTurn(userId, roundId)) == 1){
             //Check if pot is empty
-            if((await Games.getPot(roundId)) < 1){
+            if((await Games.getPot(roundId)).pot < 1){
                 //End turn
                 await Games.endTurn(roomId, roundId);
 
