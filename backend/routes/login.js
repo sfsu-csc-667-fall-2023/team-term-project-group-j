@@ -1,16 +1,13 @@
-const { render, resolveInclude } = require("ejs");
 const express = require("express");
-const router = express.Router(); 
+const router = express.Router();
 
-
-router.get("/",(request, response)=>{
+router.get("/", (request, response) => {
   response.render("login");
-
-router.post("/login", (request, response) => {
-    // Process login data
-  
-  }); 
 });
 
+router.post("/login", (request, response) => {
+  // Process login data
+  // ...
+});
 
-module.exports = router; 
+module.exports = router;

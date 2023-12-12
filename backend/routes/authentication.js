@@ -6,8 +6,9 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const { emit } = require("process");
 const SALT_ROUND = 10;
-
+console.log("before loaded ");
 const { Users } = require("../db/index");
+console.log("after loaded ");
 //const { Z_ASCII } = require("zlib");
 
 router.get("/login",(request, response)=>{
@@ -52,7 +53,7 @@ router.post("/signup", async(request,response)=>{
 
 router.post("/login", async(request,response)  => {
   const {email, password} = request.body;
-
+console.log({email, password})
   try{
     const user = await Users.find_by_email(email);
     const isValiduser = await bcrypt.compare(password, user.password);
@@ -62,7 +63,7 @@ router.post("/login", async(request,response)  => {
         id: user.id,
         email,
       };
-      //console.log({user, session: request.session})
+      console.log({user, session: request.session})
       response.redirect("/playerroom");
       //response.redirect("/gamelobby");
       return;
