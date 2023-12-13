@@ -1,12 +1,13 @@
 const { render, resolveInclude } = require("ejs");
 const express = require("express");
-const { Games } = require("../db/index")
-const router = express.Router(); 
+const router = express.Router();
 
-router.get("/",(request, response)=>{
-    
-
-    response.render("gamelobby")
+router.get("/", (request, response) => {
+  response.render("gamelobby");
 });
 
-module.exports = router; 
+router.post("/gamelobby", (request, response) => {
+  // Process login data
+});
+
+module.exports = router;

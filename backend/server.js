@@ -19,9 +19,9 @@ const { execPath } = require("process");
 
 const app = express();
 const httpServer = createServer(app);
-
+ 
 app.use(morgan("dev"));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 app.use(
   bodyParser.urlencoded({
     extended:true,
@@ -84,12 +84,12 @@ app.set("io", io);
 io.on("connection", (socket) => {
   const sessionId = socket.request.session.id;
   console.log({sessionId})
-  socket.join(sessionId);
+  socket.join(socket.request.session.id);
 
   if(socket.handshake.query !== undefined){
-    socket.join(socket.handshake.query.id)
-    console.log(socket.handshake.query.id);
+    socket.join(socket.handshake.query.gameSocketId)
   }
+
 })
 
 //middleware called here
@@ -97,15 +97,17 @@ io.on("connection", (socket) => {
 
 const loginRoutes = require("./routes/login");
 const signupRoutes = require("./routes/signup");
-const authtRoutes = require("./routes/authentication");
+const authenticationRoutes = require('./routes/authentication');
 const playerroomRoutes = require("./routes/playerroom");
+const gamelobbyRoutes = require("./routes/gamelobby")
 const chatRoutes = require("./routes/chat");
 const gameRoutes = require("./routes/games");
 
 app.use("/", signupRoutes);
-app.use("/authentication", authtRoutes);
+app.use('/authentication', authenticationRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
+app.use("/gamelobby", gamelobbyRoutes);
 app.use("/playerroom", isAuthenticated, playerroomRoutes);
 app.use("/chat", isAuthenticated, chatRoutes);
 app.use("/games", isAuthenticated, gameRoutes);

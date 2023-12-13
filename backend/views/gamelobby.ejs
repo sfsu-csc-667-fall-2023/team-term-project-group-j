@@ -26,14 +26,14 @@
 
         <main class="container">
             <div class="container-box-lobby">
-            <h1>Game <%= id %></h1>
+           <h1>Game <%= id %></h1>
             <div class="gameboard">
                   <div class="player-one">Name1: $100</div>
                   <div class="player-two">Name2: $100</div>
                   <div class="player-three">Name3: $100</div>
                   <div class="player-four">Name4: $100</div>
                   <div class="player-five">Name5: $100</div>
-
+</div>
                 <div class="controls">
                     <div class="pot-blind">
                     <div class="pot">POT: $100</div>
@@ -54,6 +54,7 @@
                         </div>
                 </div>
 
+                <dive class="player-btn">
                 <% if (user.id === gameHostId && roundId == -1) { %>
                     <ul>
                         <form id="startForm">
@@ -75,6 +76,7 @@
                         <input type="number" id="raiseField" name="raiseField" required>
                     </form>
                 <% } %>
+                </div>
             </div>
 
             <input
@@ -114,12 +116,7 @@
     background-color: #021838;
 }
 
-.container {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+
 
 .container-box-lobby {
     height: 600px;
@@ -129,7 +126,7 @@
     margin: 15px auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Updated from center */
     align-items: center;
 }
 
@@ -137,9 +134,11 @@ h1 {
     color: aliceblue;
     text-align: center;
     font-size: 2em;
+    margin-top: 20px; /* Added to create space from the top */
 }
 
 .game-and-player {
+    align-items: center;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -147,6 +146,8 @@ h1 {
 
 
 .gameboard {
+    margin-top: 20px;
+    
     display: flex;
     flex-direction: row; 
     justify-content: space-around; 
@@ -205,7 +206,10 @@ h1 {
     flex-direction: column; 
     align-items: center; 
 }
-
+.player-btn {
+    display: flex;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+}
 .controls {
     background-color: rgb(3, 36, 25);
     height: 300px;
