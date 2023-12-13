@@ -67,7 +67,7 @@ const dealCard = async (roomId) => {
             randomRank = Math.floor(Math.random() * (13 - 1 + 1)) + 1;
             randomSuite = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
 
-        }while(await checkIfInDeck(game.round_id, randomRank, randomSuite) == 1)
+        }while(await checkIfInDeck(randomRank, randomSuite, deck) == 1)
 
         //Assign the card to an owner
         let owner = 0;
@@ -132,7 +132,6 @@ const dealCard = async (roomId) => {
 
         //Create the card and put it in the db
         const result = await db.one(CREATE_CARD, [randomRank, randomSuite, owner]);
-
 
         //Put the card's id in the deck
         deck[i] = result.id;

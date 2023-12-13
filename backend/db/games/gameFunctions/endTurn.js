@@ -11,8 +11,6 @@ const {revealNextCC} = require("../settersAdders/revealNextCC.js");
 
 const endTurn = async (roomId, roundId) => {
     console.log("EndTurn");
-    console.log(await checkFoldedPlayers(roomId));
-    console.log(await getUserCount(roomId) - 1);
 
     //Check how many players have folded
     if(await checkFoldedPlayers(roomId) == await getUserCount(roomId) - 1){

@@ -18,6 +18,10 @@ console.log("Call")
     if((await Games.isPlayerInGame(roomId, userId)) == 1){
         //Check if in current turn
         if((await Games.userIsCurrentTurn(userId, roundId)) == 1){
+            //This is here to quickly test who won the hand
+            //await Games.dealCard(roomId);
+            //await Games.determineWinner(roomId, roundId);
+
             //Check if pot is empty
             if((await Games.getPot(roundId)).pot > 0){
                 //Get the blind;

@@ -3,32 +3,28 @@ const { connection: db } = database;
 
 const { getCard } = require("../getters/getCard");
 
-const GET_DECK = `
-  SELECT deck FROM rounds
-  WHERE id=$1
-`;
-
-const checkIfInDeck = async (roundId, rank, suite) => {
+const checkIfInDeck = async (rank, suite, deck) => {
+    console.log("\nChecking card of rank " + rank + " suite " + suite)
     try {
-        // Fetch the deck from the database
-        const result = await db.one(GET_DECK, [roundId]);
-        const deck = result.deck;
-
         if(deck == null){
             return 0;
         }
 
         // Check if any card in the deck has the same rank and suite
-        const cardExists = await Promise.all(
-            deck.map(async (cardId) => {
-                // Fetch the card from the database based on its ID
-                const card = await getCard(cardId);
-                return card.rank === rank && card.suite === suite;
-            })
-        );
-
-        // Return 1 if at least one card with the same rank and suite is found
-        return cardExists.some((exists) => exists) ? 1 : 0;
+        for(let x = 0; x < deck.length; x++){
+            //Skip the card if the card id is -1
+            if(deck[x] != -1){
+                const card = await getCard(deck[x]);
+                if(card.rank == rank && card.suite == suite){
+                    // Return 1 the current card has the same suite and rank
+                    //console.log("Already in the deck");
+                    return 1;
+                }
+            }
+            
+        }
+        //If it gets here then the current card is not in the deck
+        return 0;
     } catch (error) {
         console.error("Error checking if card is in deck:", error);
         throw error;

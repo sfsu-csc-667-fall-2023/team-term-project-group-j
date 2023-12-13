@@ -2,7 +2,6 @@ const database = require("../../connection");
 const { connection: db } = database;
 
 const {roundFoldPlayer} = require("../settersAdders/roundFoldPlayer.js");
-const {getGame} = require("../getters/getGame.js");
 const {getPlayerMoney} = require("../getters/getPlayerMoney.js");
 const {setCurrentPlayer} = require("../settersAdders/setCurrentPlayer.js");
 const {dealCard} = require("../settersAdders/dealCard.js");
@@ -62,6 +61,7 @@ const startRound = async (roundId, roomId) => {
 
     //This will set the round's deck
     await dealCard(roomId);
+
     return 1;
 }
 
