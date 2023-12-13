@@ -60,7 +60,7 @@ const endRound = async (roomId, roundId) => {
         winnerId = await determineWinner(roomId, roundId);
     }
     
-    //Award winnder
+    //Award winner
     await addPlayerMoney(winnerId, roomId, (await getPot(roundId)).pot);
     //Delete cards from db
     const resultDeck = await db.one(GET_DECK, [roundId]);

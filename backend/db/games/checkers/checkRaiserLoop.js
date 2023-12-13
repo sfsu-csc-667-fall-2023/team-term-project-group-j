@@ -22,7 +22,6 @@ const checkRaiserLoop = async (gameId) => {
     }
 
     const resultCurrent = await getCurrentTurn(gameId);
-    console.log(resultCurrent);
     const currentPlayer = resultCurrent.currentTurn_id;
     const resultRaiser = await getRaiser(gameId);
     const raiserId = resultRaiser.raiser_id;

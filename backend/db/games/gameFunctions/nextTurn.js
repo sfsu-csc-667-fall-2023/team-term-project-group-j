@@ -48,10 +48,7 @@ const nextTurn = async (gameId) => {
             //Check if they have money or if they have folded
             let resultMoney = await getPlayerMoney(nextPlayer, gameId);
             const foldedStatus = await getPlayerFolded(nextPlayer, gameId);
-            const moneyStatus = resultMoney.bank;
-
-            console.log(foldedStatus);
-            
+            const moneyStatus = resultMoney.bank;            
 
             if (moneyStatus > 0 && foldedStatus == 0) {
                 console.log("Next Turn = ", nextPlayer);

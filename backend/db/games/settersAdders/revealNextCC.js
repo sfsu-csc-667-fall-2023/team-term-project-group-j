@@ -33,9 +33,7 @@ const revealNextCC = async (roundId) => {
         const parsedCardId = parseInt(cardId, 10);
         deckArray.push(parsedCardId);
     }
-
-    console.log(deckArray);
-
+//console.log(deckArray);
     let c4result = await getCard(deckArray[3]);
     let cCard4 = c4result.user_id;
     let cCard4id = c4result.id;

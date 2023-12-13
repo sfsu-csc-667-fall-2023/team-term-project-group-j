@@ -31,10 +31,15 @@ console.log("Call")
                 //Check how much money the player has
                 const bankResult = await Games.getPlayerMoney(userId, roomId);
                 const playerBank = bankResult.bank;
-                let moneyToGamble = blind;
 
-                if(playerBank < blind){
-                  moneyToGamble = playerBank;
+                //Check how much money the player has gambled already
+                const gambledResult = await Games.getPlayerGambled(userId, roomId);
+                const playerGambled = gambledResult.gambled;
+
+                let moneyToGamble = blind - playerGambled;
+
+                if(playerBank < moneyToGamble){
+                    moneyToGamble = blind - playerBank;
                 }
 
                 await Games.subPlayerMoney(userId, roomId, moneyToGamble);

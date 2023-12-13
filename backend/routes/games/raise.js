@@ -23,21 +23,28 @@ const handler = async (request, response) => {
             const blindResult = await Games.getBlind(roundId);
             const blind = blindResult.blind;
 
-            if(blind <= raiseAmount){
+            if(blind < raiseAmount){
                 //check if the player has enough money to do that
                 const bankResult = await Games.getPlayerMoney(userId, roomId);
                 const playerBank = bankResult.bank;
                 
                 if(raiseAmount < playerBank){
+                    //Check how much money the player has gambled already
+                    const gambledResult = await Games.getPlayerGambled(userId, roomId);
+                    const playerGambled = gambledResult.gambled;
+
+                    const moneyToAdd = raiseAmount - playerGambled;
+
+                    console.log("Money To Add = " + moneyToAdd);
+
                     //Raise blind
                     await Games.raiseBlind(roundId, userId, raiseAmount);
                     //Subtract the player's money
-                    await Games.subPlayerMoney(userId, roomId, raiseAmount);
+                    await Games.subPlayerMoney(userId, roomId, moneyToAdd);
                     //Increase the pot
-                    await Games.increasePot(roundId, raiseAmount);
+                    await Games.increasePot(roundId, moneyToAdd);
                     //End turn
                     await Games.endTurn(roomId, roundId);
-
                 }
                 else{
                     console.log("Illegal move: Not enough Money");

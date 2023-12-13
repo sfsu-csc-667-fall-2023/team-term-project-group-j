@@ -4,7 +4,7 @@ const { connection: db } = database;
 const { getCard } = require("../getters/getCard");
 
 const checkIfInDeck = async (rank, suite, deck) => {
-    console.log("\nChecking card of rank " + rank + " suite " + suite)
+//console.log("\nChecking card of rank " + rank + " suite " + suite)
     try {
         if(deck == null){
             return 0;

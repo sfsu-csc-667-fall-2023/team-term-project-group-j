@@ -25,6 +25,7 @@ const { getCard } = require("./games/getters/getCard.js");
 const { getCurrentTurn } = require("./games/getters/getCurrentTurn.js");
 const { getGame } = require("./games/getters/getGame.js");
 const { getGameHost } = require("./games/getters/getGameHost.js");
+const { getPlayerGambled } = require("./games/getters/getPlayerGambled.js");
 const { getPlayerMoney } = require("./games/getters/getPlayerMoney.js");
 const { getPot } = require("./games/getters/getPot.js");
 const { getRaiser } = require("./games/getters/getRaiser.js");
@@ -72,6 +73,7 @@ module.exports = {
     getCurrentTurn,
     getGame,
     getGameHost,
+    getPlayerGambled,
     getPlayerMoney,
     getPot,
     getRaiser,

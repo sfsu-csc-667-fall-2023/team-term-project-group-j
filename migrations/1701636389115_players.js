@@ -29,6 +29,11 @@ exports.up = pgm => {
             // If a player has folded in a current round and is not playing
             default: 0, // Default value set to false (0 in boolean context)
         },
+        gambled:{
+            type: "integer",
+            // This is how much money a player gambled in a round
+            default: 0, 
+        }
     });
 };
 
