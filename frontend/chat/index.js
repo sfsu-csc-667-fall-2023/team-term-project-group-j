@@ -10,15 +10,15 @@ chatSocket.on("connect", () => {
 
 
 //When the chat socket recieves a message
-chatSocket.on(`chat:message:0`, ({from, timestamp, message, hash }) => {
-    const messageTemplate = document.querySelector("#chat-message").content.cloneNode(true)
+chatSocket.on(`chat:message:0`, ({ from, timestamp, message, hash }) => {
+    // const messageTemplate = document.querySelector("#chat-message").content.cloneNode(true)
 
-    console.log(messageTemplate);
+    // console.log(messageTemplate);
 
     const div = document.createElement("div")
     div.classList.add("message");
 
-    const img =document.createElement("img");
+    const img = document.createElement("img");
     img.src = `https://gravatar.com/avatar/${hash}?s=50`;
     img.alt = `Avatar of ${from}`
 
@@ -47,15 +47,15 @@ document.getElementById(`submit`).addEventListener(`click`, event => {
     submitMessage();
 });
 
-function submitMessage(){
+function submitMessage() {
     const message = document.getElementById("chat").value;
     console.log("Message submitted:", message);
-    
-    fetch(`/0/chat`, {
+
+    fetch(`/chat/0/chat`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
-        });
+    });
 
     document.getElementById("chat").value = "";
 }
