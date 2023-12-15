@@ -3,6 +3,7 @@ const { connection: db } = database;
 
 const { getGame } = require("../getters/getGame.js");
 const { getPot } = require("../getters/getPot.js");
+const { getCurrentTurn } = require("../getters/getCurrentTurn.js");
 const { getBlind } = require("../getters/getBlind.js");
 const { getRoundCards } = require("../getters/getRoundCards.js");
 
@@ -26,6 +27,9 @@ const getGameState = async (gameId) => {
     const resultBlind = await getBlind(roundId);
     const blind = resultBlind.blind;
 
+    const currentResult = await getCurrentTurn(roundId);
+    const currentTurn = currentResult.currentTurn_id;
+
     const roundCards = await getRoundCards(gameId);
 
     const result = await db.oneOrNone(GET_PLAYERS, [gameId]);
@@ -43,6 +47,7 @@ const getGameState = async (gameId) => {
     const gameState = {
       pot: pot,
       blind: blind,
+      currentTurn: currentTurn,
       deck: roundCards,
       players: players
     };
