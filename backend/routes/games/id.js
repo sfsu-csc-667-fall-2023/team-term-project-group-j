@@ -16,7 +16,6 @@ const handler = async (request, response) => {
     const {round_id: roundId } = await Games.getRoundId(id);
 
     response.render("gamelobby", { id, gameSocketId, userSocketId, gameHostId, roundId});
-    
 };
 
 module.exports = { method, route, handler };

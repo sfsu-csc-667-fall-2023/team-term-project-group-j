@@ -1,19 +1,25 @@
 import { io } from "socket.io-client";
 import * as GAME_CONSTANTS from "@constants/games";
 
-console.log("Hello from bundled game socket");
-const userId = document.querySelector("#user-id").value;
-
 let gameSocket;
+let userId;
 
-const configure = (socketId) => {
+const configure = (socketId, user) => {
   gameSocket = io({ query: { id: socketId } });
   console.log("Game socket configured");
+
+  userId = user;
+
+  gameSocket.on(GAME_CONSTANTS.STATE_UPDATED, stateUpdated);
 
   return Promise.resolve();
 };
 
-gameSocket.on(GAME_CONSTANTS.STATE_UPDATED, stateUpdated);
+let playerOne = document.getElementById("player-one");
+let playerTwo = document.getElementById("player-two");
+let playerThree = document.getElementById("player-three");
+let playerFour = document.getElementById("player-four");
+let playerFive = document.getElementById("player-five");
 
 const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
     // Callback function called when the game state is updated
@@ -22,19 +28,25 @@ const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
   
     // Update the displayed blind and pot in the UI
     updateBlindAndPot(blind, pot);
-
-    updateCurrentTurn(currentTurn);
   
-    if(communityCards !== 0){
+    if(deck !== 0){
         // Update the community cards in the UI
         updateCards(deck);
     }
 
     if (Array.isArray(players)) {
-        for(let x = 0; x < players.length; x++){
-            const {user_id, username, bank, folded} = players[x];
+        for(let x = 0; x < 5; x++){
+            let user_id = -1;
+            let username = 0;
+            let bank = 0;
+            let folded = 0;
+
+            if(x < players.length){
+                ({ user_id, username, bank, folded } = players[x]);
+            }
             
-            const isTurn = 0;
+            let isTurn = 0;
+
             if(user_id == currentTurn){
                 isTurn = 1;
             }
@@ -54,35 +66,44 @@ const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
     }
 };
 
-const potElement = document.getElementById(".pot");
-const blindElement = document.getElementById(".blind-btn");
+let potElement = document.getElementById("pot");
+let blindElement = document.getElementById("blind-btn");
 
-const checkElement = document.getElementById(".pot");
-const callElement = document.getElementById(".blind-btn");
+let checkElement = document.getElementById("checkForm");
+let callElement = document.getElementById("callForm");
   
 const updateBlindAndPot = (blind, pot) => {
+    console.log("Update Blind and Pot");
     potElement.innerHTML = "POT: $" + pot;
     blindElement.innerHTML = "BLIND: $" + blind;
 
     //Remove Check or Call button depending on the pot
-    if(pot < 1){
-        //Remove the call button, add check
-
-    }else{
-        //Remove the check button, add call
-
+    if (pot < 1) {
+        // Show the check button and hide the call button
+        checkElement.style.display = "inline-block";
+        callElement.style.display = "none";
+    } else {
+        // Hide the check button and show the call button
+        checkElement.style.display = "none";
+        callElement.style.display = "inline-block";
     }
 };
 
-const ccOne = document.getElementById(".comm-card-one");
-const ccTwo = document.getElementById(".comm-card-two");
-const ccThree = document.getElementById(".comm-card-three");
-const ccFour = document.getElementById(".comm-card-four");
-const ccFive = document.getElementById(".comm-card-five");
+let ccOne = document.getElementById("comm-card-one");
+let ccTwo = document.getElementById("comm-card-two");
+let ccThree = document.getElementById("comm-card-three");
+let ccFour = document.getElementById("comm-card-four");
+let ccFive = document.getElementById("comm-card-five");
+
+let holeOne = document.getElementById("chose-card-one");
+let holeTwo = document.getElementById("chose-card-two");
 
 // Update the displayed cards in the UI
 const updateCards = (deck) => {
-    console.log("Deck " + deck);
+    console.log("Deck", deck.map(card => ({ rank: card.rank, suite: card.suite, user_id: card.user_id })));
+
+    //Since ACE is the highest rank, ACE's rank is 13. This makes the king a 12, the queen an 11
+    //the jack a 10, the 10 a 9... the 2 a 1
     
     for(let x = 0; x < deck.length; x++){
         //Display the community cards
@@ -102,25 +123,19 @@ const updateCards = (deck) => {
     }
 };
 
-const playerOne = document.getElementById(".player-one");
-const playerTwo = document.getElementById(".player-two");
-const playerThree = document.getElementById(".player-three");
-const playerFour = document.getElementById(".player-four");
-const playerFive = document.getElementById(".player-five");
-
 // Update the displayed information for each player in the UI
 const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
-    if(username !== -1){
+    if(username != 0){
         container.innerHTML = username + ": $" + bank;
 
          // Change background color based on status
-        if (folded === 1) {
+        if (folded == 1) {
             container.style.backgroundColor = "red";
         } 
-        else if (currentTurn === 1) {
-            container.style.backgroundColor = "black";
+        else if (currentTurn == 1) {
+            container.style.backgroundColor = "green";
         }
-        else if (folded === 0) {
+        else if (folded == 0) {
             container.style.backgroundColor = "black";
         }
     }else{

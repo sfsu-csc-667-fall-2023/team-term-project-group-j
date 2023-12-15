@@ -1,10 +1,11 @@
+import { configure as gameSocketConfig } from "./game_socket";
+
 const gameSocketId = document.querySelector("#game-socket-id").value;
 const userSocketId = document.querySelector("#user-socket-id").value;
 const roomId = document.querySelector("#room-id").value;
 const userId = document.querySelector("#user-id").value;
 
 let raiseCount = 0; 
-
 const raiseCountElement = document.getElementById("raiseField");
 
 const handleStartAction = (event) => {
@@ -77,3 +78,5 @@ addEventListenerIfElementExists("checkForm", handleCheckAction);
 addEventListenerIfElementExists("callForm", handleCallAction);
 addEventListenerIfElementExists("foldForm", handleFoldAction);
 addEventListenerIfElementExists("raiseForm", handleRaiseAction);
+
+gameSocketConfig(gameSocketId, userId);

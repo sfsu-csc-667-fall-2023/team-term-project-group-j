@@ -87,7 +87,8 @@ io.on("connection", (socket) => {
   socket.join(socket.request.session.id);
 
   if(socket.handshake.query !== undefined){
-    socket.join(socket.handshake.query.gameSocketId)
+    console.log("Socket ID: " + socket.handshake.query.id);
+    socket.join(socket.handshake.query.id)
   }
 
 })
