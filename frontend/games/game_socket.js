@@ -14,14 +14,6 @@ const configure = (socketId, user) => {
 
   return Promise.resolve();
 };
-const checkSocketConnection = () => {
-    // Check if the socket is connected
-    if (gameSocket && gameSocket.connected) {
-      console.log('Socket is connected to the server.');
-    } else {
-      console.log('Socket is not connected to the server.');
-    }
-  };
 
 let playerOne = document.getElementById("player-one");
 let playerTwo = document.getElementById("player-two");
