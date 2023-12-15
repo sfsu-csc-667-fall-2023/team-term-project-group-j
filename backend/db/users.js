@@ -7,10 +7,6 @@ const ADD_USER = "INSERT INTO users (username, email, password) VALUES ($1, $2, 
 const SIGN_USER_IN = "SELECT * FROM users WHERE email=$1";
 const GET_USER_SOCKET ="SELECT sid FROM session WHERE sess->'user'->>'id'='$1' ORDER BY expire DESC LIMIT 1";
 
-
-
-
-
 const email_exists = (email) =>
   db.one(USER_EXISTENCE, [email])
     .then((_) => true)

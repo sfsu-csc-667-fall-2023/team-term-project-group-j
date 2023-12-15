@@ -19,6 +19,10 @@ exports.up = pgm => {
             //references: "room(room_id)",
             notNull: true,
         },
+        username: {
+            type: "varchar(256)",
+            notNull: true,
+        },
         bank: {
             type: "integer",
             // How much money a user has in a room

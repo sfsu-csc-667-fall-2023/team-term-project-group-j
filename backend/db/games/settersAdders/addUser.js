@@ -2,8 +2,8 @@ const database = require("../../connection");
 const { connection: db } = database;
 
 const CREATE_PLAYER =  `
-    INSERT INTO players (user_id, room_Id, bank, folded) 
-    VALUES ($1, $2, 100, 0)
+    INSERT INTO players (user_id, room_Id, username, bank, folded) 
+    VALUES ($1, $2, $3, 100, 0)
     RETURNING user_id
 `;
 
@@ -19,6 +19,11 @@ const UPDATE_PLAYERS = `
     RETURNING players
 `;
 
+const GET_USERNAME = `
+    SELECT username FROM users
+    WHERE id=$1
+`;
+
 const addUser = async (userId, gameId) => {
     try {
         const result = await db.one(GET_PLAYERS, [gameId]);
@@ -31,11 +36,11 @@ const addUser = async (userId, gameId) => {
             // Update the players array with the new user at the empty slot
             players[emptySlotIndex] = userId;
 
-            console.log("UserID: " + userId);
-            console.log("GameId: " + gameId);
+            const resultUser = await db.one(GET_USERNAME, [userId]);
+            const username = resultUser.username;
 
             // Create the player in the player table
-            await db.one(CREATE_PLAYER, [userId, gameId]);
+            await db.one(CREATE_PLAYER, [userId, gameId, username]);
 
             // Perform the update in the database
             await db.one(UPDATE_PLAYERS, [gameId, players]);

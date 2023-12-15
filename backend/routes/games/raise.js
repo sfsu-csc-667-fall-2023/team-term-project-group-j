@@ -35,8 +35,6 @@ const handler = async (request, response) => {
 
                     const moneyToAdd = raiseAmount - playerGambled;
 
-                    console.log("Money To Add = " + moneyToAdd);
-
                     //Raise blind
                     await Games.raiseBlind(roundId, userId, raiseAmount);
                     //Subtract the player's money
@@ -45,6 +43,13 @@ const handler = async (request, response) => {
                     await Games.increasePot(roundId, moneyToAdd);
                     //End turn
                     await Games.endTurn(roomId, roundId);
+
+                    //Broadcast the game's state to everyone
+                    console.log("BroadCast game state");
+                    const gameState = await Games.getGameState(roomId);
+                    console.log("Game socket: " + request.body.gameSocketId);
+                    console.log(gameState);
+                    io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, gameState);
                 }
                 else{
                     console.log("Illegal move: Not enough Money");
