@@ -13,13 +13,12 @@ const handler = async (request, response) => {
     if(await Games.getUserCount(roomId) > 1 && userId == await Games.getGameHost(roomId)){
         await Games.startGame(roomId);
 
-        //io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, state);
-
-        //Broadcast the user's cards
-        console.log("BroadCast");
-        //const userCards = await Games.getUserCards(userId, roomId);
-        //console.log("User socket: " + Users.getUserSocket(userId));
-        //io.to(request.body.userSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, { userId, userCards });
+        //Broadcast the game's state to everyone
+        console.log("BroadCast game state");
+        const gameState = await Games.getGameState(roomId);
+        console.log("Game socket: " + request.body.gameSocketId);
+        console.log(gameState);
+        io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, gameState);
 
         response.status(200).send();
     }

@@ -14,10 +14,9 @@ const handler = async (request, response) => {
 
     if(await Games.doesGameExist(gameId)){
         if (!userInGame && await Games.getUserCount(gameId) < 5 && (await Games.getRoundId(gameId)).round_id == -1 ) {
-            console.log("Add User");
+            //console.log("Add User");
             Games.addUser(userId, gameId);
             io.emit(GAME_CONSTANTS.USER_ADDED, { userId, gameId });
-    
             response.redirect(`/games/${gameId}`);
         }
         else{

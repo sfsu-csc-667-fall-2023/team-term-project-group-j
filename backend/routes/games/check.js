@@ -22,6 +22,12 @@ const handler = async (request, response) => {
                 //End turn
                 await Games.endTurn(roomId, roundId);
 
+                //Broadcast the game's state to everyone
+                console.log("BroadCast game state");
+                const gameState = await Games.getGameState(roomId);
+                console.log("Game socket: " + request.body.gameSocketId);
+                console.log(gameState);
+                io.to(request.body.gameSocketId).emit(GAME_CONSTANTS.STATE_UPDATED, gameState);
             }
             else{
                 console.log("Illegal move");

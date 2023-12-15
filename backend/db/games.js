@@ -25,10 +25,12 @@ const { getCard } = require("./games/getters/getCard.js");
 const { getCurrentTurn } = require("./games/getters/getCurrentTurn.js");
 const { getGame } = require("./games/getters/getGame.js");
 const { getGameHost } = require("./games/getters/getGameHost.js");
+const { getGameState } = require("./games/getters/getGameState.js");
 const { getPlayerGambled } = require("./games/getters/getPlayerGambled.js");
 const { getPlayerMoney } = require("./games/getters/getPlayerMoney.js");
 const { getPot } = require("./games/getters/getPot.js");
 const { getRaiser } = require("./games/getters/getRaiser.js");
+const { getRoundCards } = require("./games/getters/getRoundCards.js");
 const { getRoundId } = require("./games/getters/getRoundId.js");
 const { getRoundState } = require("./games/getters/getRoundState.js");
 const { getUserCards } = require("./games/getters/getUserCards.js");
@@ -73,10 +75,12 @@ module.exports = {
     getCurrentTurn,
     getGame,
     getGameHost,
+    getGameState,
     getPlayerGambled,
     getPlayerMoney,
     getPot,
     getRaiser,
+    getRoundCards,
     getRoundId,
     getRoundState,
     getUserCards,
