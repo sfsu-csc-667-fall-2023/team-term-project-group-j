@@ -31,16 +31,6 @@ chatSocket.on(`chat:message:0`, ({ from, timestamp, message, hash }) => {
     chatWindow.appendChild(div);
 });
 
-
-
-/*
-                <article id="chat-window">
-                    <p class="text-me"><i>text me... </i></p>
-                    <p class="text-me-not"><i>text me not.. </i></p>
-                </article>
-*/
-
-
 document.getElementById(`submit`).addEventListener(`click`, event => {
     console.log("Submit button clicked");
     event.preventDefault();
