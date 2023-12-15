@@ -104,6 +104,7 @@ const gamelobbyRoutes = require("./routes/gamelobby")
 const chatRoutes = require("./routes/chat");
 const gameRoutes = require("./routes/games");
 
+
 app.use("/", signupRoutes);
 app.use('/authentication', authenticationRoutes);
 app.use("/signup", signupRoutes);
@@ -112,6 +113,7 @@ app.use("/gamelobby", gamelobbyRoutes);
 app.use("/playerroom", isAuthenticated, playerroomRoutes);
 app.use("/chat", isAuthenticated, chatRoutes);
 app.use("/games", isAuthenticated, gameRoutes);
+
 
 app.use((_request, _response, next) => {
   next(createError(404));
