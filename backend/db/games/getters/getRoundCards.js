@@ -11,13 +11,13 @@ const GET_DECK = `
 
 const getRoundCards = async (roomId) => {
     const roundId = (await getRoundId(roomId)).round_id;
-    const result = await db.one(GET_DECK, [roundId]);
-    const deck = result.deck;
-
-    if(deck == null){
+    const result = await db.oneOrNone(GET_DECK, [roundId]);
+    if(result == null){
         return 0;
     }
 
+    const deck = result.deck;
+    
     const hand = new Array(5);
 
     let card;
