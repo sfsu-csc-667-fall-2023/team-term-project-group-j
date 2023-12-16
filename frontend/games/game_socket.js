@@ -210,7 +210,7 @@ const updateCards = (deck) => {
 
 // Update the displayed information for each player in the UI
 const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
-    console.log("Update player " + username + " info");
+
     if(username != 0){
         container.innerHTML = username + ": $" + bank;
 
@@ -218,11 +218,11 @@ const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
         if (folded == 1) {
             container.style.backgroundColor = "red";
         } 
+        else if (currentTurn != 1) {
+            container.style.backgroundColor = "#00008B";
+        }
         else if (currentTurn == 1) {
             container.style.backgroundColor = "green";
-        }
-        else if (folded == 0) {
-            container.style.backgroundColor = "dark blue";
         }
     }else{
         container.innerHTML = "";
