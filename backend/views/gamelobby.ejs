@@ -40,15 +40,15 @@
                 </div>
                       <div class="playerfield">
                         <div class="community-cards">
-                            <div class="comm-card-one" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-two" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-three" id="comm-card-one"><i class="fa-solid fa-diamond"></i></div>
-                            <div class="comm-card-four" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-five" id="comm-card-one"><i class="fa-solid fa-diamond"></i></div>
+                            <div class="comm-card-one" id="comm-card-one">■</div>
+                            <div class="comm-card-two" id="comm-card-two">■</div>
+                            <div class="comm-card-three" id="comm-card-three">■</div>
+                            <div class="comm-card-four" id="comm-card-four">■</div>
+                            <div class="comm-card-five" id="comm-card-five">■</div>
                           </div>
                         <div class="cards">
-                            <div class="chose-card-one" id="chose-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="chose-card-two" id="chose-card-two"><i class="fa-solid fa-diamond"></i></div>
+                            <div class="chose-card-one" id="chose-card-one">■</div>
+                            <div class="chose-card-two" id="chose-card-two">■</div>
                             </div>
                         </div>
                 </div>
@@ -105,7 +105,37 @@
 
             </div>
           </main>
+          <div class="chatarea">
+             <button class="open-btn" onclick="openChatWindow()"><i class="fa fa-comment"></i>Chat </button>
 
+    
+          <div class="chat-popup" id="chat-form-container">
+              <form action="#" class="form-container">
+                  <div class="chat-window-head">
+                      <h4><i class="users-comment"></i>Chat Window</h4>
+                      <span class="close-buttn" onclick="closeChatWindow()">
+                          <i class="the-time"></i>
+                      </span>
+                  </div>
+                  <div class="msg-container">
+                      <div class="msg">
+                          <p> Welcome </p>
+                          <span>3:48pm</span>
+                      </div>
+                  </div>
+      
+                  <div class="chat-box-container">
+                      <div class="chat-box">
+                          <input type="text" placeholder="Enter text..." name="msg" required>
+                          <button type="submit" class="btn"><i class="bottom-right-send-button"></i></button>
+                      </div>
+                  </div> 
+              </form>
+          </div>
+          <!--<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+          <script type="text/javascript" src="gamechat.js"></script>-->
+          </div>
+         
 
 
 
@@ -429,39 +459,7 @@ header{
 </html>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <button class="open-btn" onclick="openChatWindow"><i class="fa fa-comment"></i>Chat </button>
-    
-    <div class="chat-popup" id="chat-form-container">
-        <form action="#" class="form-container">
-            <div class="chat-window-head">
-                <h4><i class="users-comment"></i>Chat Window</h4>
-                <span class="close-buttn" onclick="closeChatWindow()">
-                    <i class="the-time"></i>
-                </span>
-            </div>
-            <div class="msg-container">
-                <div class="msg">
-                    <p> Welcome </p>
-                    <span>3:48pm</span>
-                </div>
-            </div>
 
-            <div class="chat-box-container">
-                <div class="chat-box">
-                    <input type="text" placeholder="Enter text..." name="msg" required>
-                    <button type="submit" class="btn"><i class="bottom-right-send-button"></i></button>
-                </div>
-            </div> 
-        </form>
-    </div>
-    <!--<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-    <script type="text/javascript" src="gamechat.js"></script>-->
 
 <style>
     .open-btn{
