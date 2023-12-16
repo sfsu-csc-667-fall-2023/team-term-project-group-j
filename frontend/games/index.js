@@ -68,8 +68,6 @@ const addEventListenerIfElementExists = (elementId, eventListener) => {
     const element = document.getElementById(elementId);
     if (element) {
         element.addEventListener("submit", eventListener);
-    } else {
-        console.warn(`Element with ID '${elementId}' not found. Event listener not added.`);
     }
 };
 

@@ -12,5 +12,4 @@ module.exports={
     login,
     gamelobby,
     chat
-
 };

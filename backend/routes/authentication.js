@@ -6,9 +6,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const { emit } = require("process");
 const SALT_ROUND = 10;
-console.log("before loaded ");
 const { Users } = require("../db/index");
-console.log("after loaded ");
 //const { Z_ASCII } = require("zlib");
 
 router.get("/login",(request, response)=>{

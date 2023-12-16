@@ -4,7 +4,7 @@ const { createHash } = require("crypto");
 
 // Define a handler function to handle both routes
 const handler = (request, response) => {
-  console.log("Start chat route");
+
   try {
     // Extract parameters and session information from the request
     const { id } = request.params;

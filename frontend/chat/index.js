@@ -18,14 +18,9 @@ chatSocket.on(`chat:message:0`, ({ from, timestamp, message, hash }) => {
     const div = document.createElement("div")
     div.classList.add("message");
 
-    const img = document.createElement("img");
-    img.src = `https://gravatar.com/avatar/${hash}?s=50`;
-    img.alt = `Avatar of ${from}`
-
     const p = document.createElement("p")
-    p.innerText = message;
+    p.innerText = from + ": " + message;
 
-    div.appendChild(img);
     div.appendChild(p);
 
     chatWindow.appendChild(div);
