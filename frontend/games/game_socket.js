@@ -21,9 +21,6 @@ let playerThree = document.getElementById("player-three");
 let playerFour = document.getElementById("player-four");
 let playerFive = document.getElementById("player-five");
 
-//html emlments for pot  and blind 
-
-
 const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
     // Callback function called when the game state is updated
     console.log("Game state updated");
@@ -43,7 +40,7 @@ const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
             let username = 0;
             let bank = 0;
             let folded = 0;
-            updatePlayerInfo(players, currentTurn);
+
             if(x < players.length){
                 ({ user_id, username, bank, folded } = players[x]);
             }
@@ -76,7 +73,7 @@ let checkElement = document.getElementById("checkForm");
 let callElement = document.getElementById("callForm");
   
 const updateBlindAndPot = (blind, pot) => {
-    //console.log("Update Blind and Pot");
+    console.log("Update Blind and Pot");
     potElement.innerHTML = "POT: $" + pot;
     blindElement.innerHTML = "BLIND: $" + blind;
 
@@ -103,13 +100,17 @@ let holeTwo = document.getElementById("chose-card-two");
 
 // Update the displayed cards in the UI
 const updateCards = (deck) => {
-    console.log("Deck", deck.map(card => ({ rank: card.rank, suite: card.suite, user_id: card.user_id })));
+    //console.log("Deck", deck.map(card => ({ rank: card.rank, suite: card.suite, user_id: card.user_id })));
     //Since ACE is the highest rank, ACE's rank is 13. This makes the king a 12, the queen an 11
     //the jack a 10, the 10 a 9... the 2 a 1
     let cardVisual;
     let y = 0;
 
+    console.log("update cards");
+
     for(let x = 0; x < deck.length; x++){
+
+        console.log(deck[x]);
         
         if(deck[x].rank == 1){
             cardVisual = "2";
@@ -209,7 +210,7 @@ const updateCards = (deck) => {
 
 // Update the displayed information for each player in the UI
 const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
-
+    console.log("Update player " + username + " info");
     if(username != 0){
         container.innerHTML = username + ": $" + bank;
 
@@ -220,7 +221,7 @@ const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
         else if (currentTurn == 1) {
             container.style.backgroundColor = "green";
         }
-        else{
+        else if (folded == 0) {
             container.style.backgroundColor = "dark blue";
         }
     }else{

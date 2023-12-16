@@ -28,7 +28,7 @@ const handler = async (request, response) => {
                 const bankResult = await Games.getPlayerMoney(userId, roomId);
                 const playerBank = bankResult.bank;
                 
-                if(raiseAmount < playerBank){
+                if(raiseAmount <= playerBank){
                     //Check how much money the player has gambled already
                     const gambledResult = await Games.getPlayerGambled(userId, roomId);
                     const playerGambled = gambledResult.gambled;

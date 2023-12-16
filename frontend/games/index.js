@@ -17,6 +17,7 @@ const handleStartAction = (event) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userSocketId, gameSocketId, userId, roomId }),
         });
+    window.location.reload();
 };
 
 const handleCheckAction = (event) => {

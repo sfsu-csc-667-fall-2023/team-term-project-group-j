@@ -17,7 +17,6 @@ const getRoundCards = async (roomId) => {
     }
 
     const deck = result.deck;
-    
     const hand = new Array(5);
 
     let card;
