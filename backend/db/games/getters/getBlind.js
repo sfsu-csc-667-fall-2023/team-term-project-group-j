@@ -6,6 +6,6 @@ const GET_BLIND = `
   WHERE id=$1
 `;
 
-const getBlind = async (roundId) => await db.one(GET_BLIND, [roundId]);
+const getBlind = async (roundId) => await db.oneOrNone(GET_BLIND, [roundId]);
 
 module.exports = { getBlind };

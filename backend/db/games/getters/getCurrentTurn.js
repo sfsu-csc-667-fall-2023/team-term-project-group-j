@@ -7,7 +7,7 @@ const GET_CURRENT_TURN = `
 `;
 
 const getCurrentTurn = async (roundId) => {
-  const result = await db.one(GET_CURRENT_TURN, [roundId]);
+  const result = await db.oneOrNone(GET_CURRENT_TURN, [roundId]);
   return result;
 };
 

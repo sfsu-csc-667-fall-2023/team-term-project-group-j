@@ -27,28 +27,28 @@
             <div class="container-box-lobby">
            <h1>Game <%= id %></h1>
             <div class="gameboard">
-                  <div class="player-one">Name1: $100</div>
-                  <div class="player-two">Name2: $100</div>
-                  <div class="player-three">Name3: $100</div>
-                  <div class="player-four">Name4: $100</div>
-                  <div class="player-five">Name5: $100</div>
+                  <div class="player-one" id="player-one">Name1: $100</div>
+                  <div class="player-two" id="player-two">Name2: $100</div>
+                  <div class="player-three" id="player-three">Name3: $100</div>
+                  <div class="player-four" id="player-four">Name4: $100</div>
+                  <div class="player-five" id="player-five">Name5: $100</div>
             </div>
                 <div class="controls">
                     <div class="pot-blind">
-                    <div class="pot">POT: $100</div>
-                    <div class="blind-btn">Blind: $5</div>     
+                    <div class="pot" id="pot">POT: $100</div>
+                    <div class="blind-btn" id="blind-btn">Blind: $5</div>     
                 </div>
                       <div class="playerfield">
                         <div class="community-cards">
-                            <div class="comm-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-two"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-three"><i class="fa-solid fa-diamond"></i></div>
-                            <div class="comm-card-four"><i class="fa-solid fa-heart"></i></div>
-                            <div class="comm-card-five"><i class="fa-solid fa-diamond"></i></div>
+                            <div class="comm-card-one" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
+                            <div class="comm-card-two" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
+                            <div class="comm-card-three" id="comm-card-one"><i class="fa-solid fa-diamond"></i></div>
+                            <div class="comm-card-four" id="comm-card-one"><i class="fa-solid fa-heart"></i></div>
+                            <div class="comm-card-five" id="comm-card-one"><i class="fa-solid fa-diamond"></i></div>
                           </div>
                         <div class="cards">
-                            <div class="chose-card-one"><i class="fa-solid fa-heart"></i></div>
-                            <div class="chose-card-two"><i class="fa-solid fa-diamond"></i></div>
+                            <div class="chose-card-one" id="chose-card-one"><i class="fa-solid fa-heart"></i></div>
+                            <div class="chose-card-two" id="chose-card-two"><i class="fa-solid fa-diamond"></i></div>
                             </div>
                         </div>
                 </div>
@@ -105,6 +105,7 @@
 
             </div>
           </main>
+<<<<<<< HEAD
           <div class="chatarea">
              <button class="open-btn" onclick="openChatWindow()"><i class="fa fa-comment"></i>Chat </button>
 
@@ -136,6 +137,9 @@
           <script type="text/javascript" src="gamechat.js"></script>-->
           </div>
          
+=======
+
+>>>>>>> be8fd2d867a0c0327ff696471b2246c25f160449
 
 
 
@@ -238,7 +242,7 @@ h1 {
 }
 .player-btn {
     display: flex;
-    gap: 10px; 
+    gap: 10px; /* Adjust the gap between buttons as needed */
 }
 .controls {
     background-color: rgb(3, 36, 25);
@@ -459,8 +463,39 @@ header{
 </html>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <button class="open-btn" onclick="openChatWindow"><i class="fa fa-comment"></i>Chat </button>
+    
+    <div class="chat-popup" id="chat-form-container">
+        <form action="#" class="form-container">
+            <div class="chat-window-head">
+                <h4><i class="users-comment"></i>Chat Window</h4>
+                <span class="close-buttn" onclick="closeChatWindow()">
+                    <i class="the-time"></i>
+                </span>
+            </div>
+            <div class="msg-container">
+                <div class="msg">
+                    <p> Welcome </p>
+                    <span>3:48pm</span>
+                </div>
+            </div>
 
-   
+            <div class="chat-box-container">
+                <div class="chat-box">
+                    <input type="text" placeholder="Enter text..." name="msg" required>
+                    <button type="submit" class="btn"><i class="bottom-right-send-button"></i></button>
+                </div>
+            </div> 
+        </form>
+    </div>
+    <!--<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script type="text/javascript" src="gamechat.js"></script>-->
 
 <style>
     .open-btn{

@@ -22,15 +22,24 @@ const getGameState = async (gameId) => {
     const roundId = resultGame.round_id;
 
     const resultPot = await getPot(roundId);
-    const pot = resultPot.pot;
+    let pot = 0;
+    if(resultPot != null){
+      pot = resultPot.pot;
+    }
 
     const resultBlind = await getBlind(roundId);
-    const blind = resultBlind.blind;
+    let blind = 0;
+    if(resultBlind != null){
+      blind =resultBlind.blind;
+    }
 
     const currentResult = await getCurrentTurn(roundId);
-    const currentTurn = currentResult.currentTurn_id;
+    let currentTurn = 0
+    if(currentResult != null){
+      currentTurn = currentResult.currentTurn_id;
+    }
 
-    const roundCards = await getRoundCards(gameId);
+    let roundCards = await getRoundCards(gameId);
 
     const result = await db.oneOrNone(GET_PLAYERS, [gameId]);
     const playersString = String(result.players);
