@@ -21,6 +21,9 @@ let playerThree = document.getElementById("player-three");
 let playerFour = document.getElementById("player-four");
 let playerFive = document.getElementById("player-five");
 
+//html emlments for pot  and blind 
+
+
 const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
     // Callback function called when the game state is updated
     console.log("Game state updated");
@@ -40,7 +43,7 @@ const stateUpdated = ({ blind, pot, currentTurn, deck, players }) => {
             let username = 0;
             let bank = 0;
             let folded = 0;
-
+            updatePlayerInfo(players, currentTurn);
             if(x < players.length){
                 ({ user_id, username, bank, folded } = players[x]);
             }
@@ -100,7 +103,7 @@ let holeTwo = document.getElementById("chose-card-two");
 
 // Update the displayed cards in the UI
 const updateCards = (deck) => {
-    console.log("Deck", deck.map(card => ({ rank: card.rank, suite: card.suite, user_id: card.user_id })));
+    console.log("Deck", deck.map(card => ({ rank: convertRank(card.rank), suite: card.suite, user_id: card.user_id })));
 
     //Since ACE is the highest rank, ACE's rank is 13. This makes the king a 12, the queen an 11
     //the jack a 10, the 10 a 9... the 2 a 1
@@ -123,6 +126,16 @@ const updateCards = (deck) => {
     }
 };
 
+const convertRank = (rank) => {
+//since ace is the highest rank is 13
+//king 12 queen 11 and  so on 
+
+    if (rank === 1) {
+        return 2;
+    } else {
+        return 15 - rank; 
+    }
+};
 // Update the displayed information for each player in the UI
 const updatePlayerInfo = (container, username, bank, folded, currentTurn) => {
     if(username != 0){
